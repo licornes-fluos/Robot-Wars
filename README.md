@@ -11,7 +11,11 @@ projet de nsi 2020-2021
  - Vie du perso et dégâts de la bombe
 
 
- 
+## Roles
+Aline:
+Rachel:
+Vazgen:
+Yuko:
 
 ## Mardi 1er Décembre
 Brainstorming du projet
