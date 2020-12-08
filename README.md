@@ -1,6 +1,11 @@
 # Robot-Wars
 projet de nsi 2020-2021
 
+Robot Wars (nom temporaire?)
+ - jeu en 2D top-down à 2 joueurs sur le même clavier (WASD/ZQSD et flèches directionnelles ou personnalisé)
+ - 2 robots contrôlés par chaque joueur se battent jusqu'à ce que l'un perde
+ - système d'attaques et de défenses dans le sens vers lequel le robot regarde
+
 
 ## Projet
  - Commencer le programme 
@@ -11,11 +16,7 @@ projet de nsi 2020-2021
  - Vie du perso et dégâts de la bombe
 
 
-## Roles
-Aline:
-Rachel:
-Vazgen:
-Yuko:
+ 
 
 ## Mardi 1er Décembre
 Brainstorming du projet
