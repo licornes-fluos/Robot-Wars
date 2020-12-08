@@ -15,28 +15,8 @@ Robot Wars (nom temporaire?)
  - Vie du perso et dégâts de la bombe
 
 ## Répartition des rôles
- - Aline: 
- - Rachel: 
- - Vazgen: 
- - Yuko: 
- 
-
-## Mardi 1er Décembre
-Brainstorming du projet
-On va commencer par le graphisme
- - Décor
- - Bombe
- - Bouclier
- - Les deux robots
-
-
-Recherche de bibliothèques
-
- 
-
- 
- 
- 
- 
- 
+ - Aline: s'occupe de prgrammer la carte
+ - Rachel: s'occupe des personnages
+ - Vazgen: s'occupe du temps de vie et dégâts
+ - Yuko: s'occupe des attaques
  
