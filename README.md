@@ -7,15 +7,18 @@ Robot Wars (nom temporaire?)
  - système d'attaques et de défenses dans le sens vers lequel le robot regarde
 
 
-## Projet
- - Commencer le programme 
+## Projet de base
  - Déterminer une carte 2D top-down (grille)
  - Programmer les touches pour bouger x2
  - Faire apparaître les personnages
  - Touche pour attaque de bases (bombe) x2 (où la bombe va quand on la pose, combien de dégâts, force de la bombe -1 case dans tous les sens-)
  - Vie du perso et dégâts de la bombe
 
-
+## Répartition des rôles
+ - Aline: 
+ - Rachel: 
+ - Vazgen: 
+ - Yuko: 
  
 
 ## Mardi 1er Décembre
