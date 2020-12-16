@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pygame
 
 # creates colours that will be used for the sprites
