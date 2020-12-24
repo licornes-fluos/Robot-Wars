@@ -1,3 +1,5 @@
+# j'ai fusionné main1 avec le script amélioré de Rachel pour les sprites. À ensuite voir comment séparer les 2 at appeler l'algo sprites depuis main mais ça marche.
+
 import pygame
 import random
 import time
