@@ -154,7 +154,7 @@ while open:
 
 
     # --- Game logic
-    pygame.time.delay(30)
+    pygame.time.delay(30) # updates screen every 30 ms = lowers speed of players (lower = faster, higher = slower)
     if player1Up and player1.rect.y >= 0 + 120 :
         player1Facing = "up"
         player1.rect.y -= 10
