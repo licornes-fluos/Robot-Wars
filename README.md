@@ -20,3 +20,6 @@ Robot Wars (nom temporaire?)
  - Vazgen: s'occupe du temps de vie et dégâts
  - Yuko: s'occupe des attaques
  
+## Needed to run:
+ - latest main file (main3.py for now)
+ - assets folder
