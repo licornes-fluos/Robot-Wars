@@ -202,7 +202,7 @@ while open:
     #player1.rect.y = pos[1]-9
     if start:
     #loads background image
-        background_image = pygame.image.load("C:/Users/Aline/Documents/0 Docs/Devoirs/1ere/robotwars/assets/bg.png").convert()
+        background_image = pygame.image.load("assets/bg.png").convert()
         screen.blit(background_image, [0, 0])
     # draws all the spites
         all_sprites_list.draw(screen)
