@@ -21,5 +21,5 @@ Robot Wars (nom temporaire?)
  - Yuko: s'occupe des attaques
  
 ## Needed to run:
- - latest main file (main3.py for now)
+ - latest main file (main4.py for now)
  - assets folder
