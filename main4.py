@@ -16,7 +16,8 @@ def main():
     pygame.init()
     
     # sets size of the screen
-    size = (800, 600) # width,height
+    size = (1920, 1080) # width,height
+    limit_arena = (241, 115, 115, 115) #size of the arena
     screen = pygame.display.set_mode(size) #sets size of popup window
 
     # creates a list of 'sprites.' that will contain sprites other than the players
@@ -26,20 +27,21 @@ def main():
     all_sprites_list = pygame.sprite.Group()
     
     
-    
     player1Keys = {"up":pygame.K_i,"down":pygame.K_k,"left":pygame.K_j,"right":pygame.K_l,"attack":pygame.K_n}
     player2Keys = {"up":pygame.K_e,"down":pygame.K_d,"left":pygame.K_s,"right":pygame.K_f,"attack":pygame.K_v}
     
     # creates a first player which is purple and adds it to 
-    player1 = Player(Player.PURPLE, 20, 20, 550, 290, size[0], size[1])
+    player1 = Player(Player.PURPLE, 40, 40, size[0]//3*2, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3])
     all_sprites_list.add(player1)
     
     # creates second player
-    player2 = Player(Player.GREEN, 20, 20, 230, 290, size[0], size[1])
+    player2 = Player(Player.GREEN, 40, 40, size[0]//3, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3])
     all_sprites_list.add(player2)
        
     
-    screen.fill(Player.WHITE) # fills window with white
+    #screen.fill(Player.WHITE) # fills window with white
+    background_image = pygame.image.load("assets/firstpage1.png").convert()
+    screen.blit(background_image, [0, 0])
     pygame.display.flip() # updates display window
     
     print("Press SPACE to start.")
@@ -112,7 +114,7 @@ def main():
             player2.move()
 
             #loads background image
-            background_image = pygame.image.load("assets/bg.png").convert()
+            background_image = pygame.image.load("assets/bg2.png").convert()
             screen.blit(background_image, [0, 0])
             # draws all the sprites
             all_sprites_list.draw(screen)

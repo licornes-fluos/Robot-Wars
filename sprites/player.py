@@ -25,7 +25,7 @@ class Player(pygame.sprite.Sprite):
     RED      = ( 255,   0,   0)
     BLUE     = (   0,   0, 255)
 
-    def __init__(self, colour, width, height, x, y, screen_width, screen_height):
+    def __init__(self, colour, width, height, x, y, screen_width, screen_height, arena_top, arena_bottom, arena_left, arena_right):
         '''
         this is a constructor
         in the parameters, there is the colour, the width and the height
@@ -40,11 +40,19 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.Surface([width, height])
         self.image.fill(colour) 
         
+        # defines the size of the sprites
         self.width = width
         self.height = height
 
+        # defines the height and width of the screen
         self.screen_width = screen_width
         self.screen_height = screen_height
+
+        #defines the limits of the arena
+        self.arena_top = arena_top
+        self.arena_bottom = arena_bottom
+        self.arena_left = arena_left
+        self.arena_right = arena_right
         # initialises the direction attributes
         self.direction = Direction.Stopped
 
@@ -77,13 +85,13 @@ class Player(pygame.sprite.Sprite):
     def move(self):
         if self.direction == Direction.Stopped:
             return
-        elif self.direction == Direction.Up and self.rect.y >= 0 + 120 :
+        elif self.direction == Direction.Up and self.rect.y >= self.arena_top :
             self.rect.y -= 10
-        elif self.direction == Direction.Down and self.rect.y <= self.screen_height - self.height - 70:
+        elif self.direction == Direction.Down and self.rect.y <= self.screen_height - self.height - self.arena_bottom:
             self.rect.y += 10
-        elif self.direction == Direction.Left and self.rect.x >= 0 + 90:
+        elif self.direction == Direction.Left and self.rect.x >= 0 + self.arena_left:
             self.rect.x -= 10
-        elif self.direction == Direction.Right and self.rect.x <= self.screen_width - self.width - 90:
+        elif self.direction == Direction.Right and self.rect.x <= self.screen_width - self.width - self.arena_right:
             self.rect.x += 10
     
     def start(self):
