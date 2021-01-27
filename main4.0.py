@@ -114,7 +114,7 @@ def main():
             player2.move()
 
             #loads background image
-            background_image = pygame.image.load("assets/bg2.png").convert()
+            background_image = pygame.image.load("assets/bg3.png").convert()
             screen.blit(background_image, [0, 0])
             # draws all the sprites
             all_sprites_list.draw(screen)
