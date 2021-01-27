@@ -1,8 +1,8 @@
 bombs :
 > bomb explodes after 2 seconds
 > print when collision with a player. who did the bomb collide with?
-	> radius of 30 pixels around bomb 
-> when bomb is placed, add a 20 second countdown during which a new bomb cannot be placed
+	> radius of 70 pixels around bomb 
+> when bomb is placed, add a 5 second countdown during which a new bomb cannot be placed
 
 
 pseudo code/python hybrid:
@@ -10,7 +10,7 @@ pseudo code/python hybrid:
 canPlaceBomb = True
 
 def explode():
-	make invinsible 30 px square appear centered on bomb
+	make invinsible 70 px square appear centered on bomb
 
 def placeBomb(x,y):
 	show bomb sprite at x,y coordinates
@@ -22,5 +22,5 @@ def placeBomb(x,y):
 if canPlaceBomb:
 	if event == attackKey:
 		placeBomb(x,y)
-		for 20 seconds:
+		for 5 seconds:
 			canPlaceBomb = False
