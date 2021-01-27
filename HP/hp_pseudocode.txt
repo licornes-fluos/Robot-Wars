@@ -1,0 +1,4 @@
+player1Health = 100
+player2Health = 100
+
+player1HPBarreX = player1Health * 47   # nb de pixels affiches
