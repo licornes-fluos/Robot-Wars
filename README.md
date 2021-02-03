@@ -25,16 +25,16 @@ Robot Wars (nom temporaire?)
  - assets folder
 
 ## Difficultés
- - passé
- problèmes de touches (claviers qwerty, azerty)
- mise en place des attentes esthétiques
+ # passé
+ - problèmes de touches (claviers qwerty, azerty)
+ - mise en place des attentes esthétiques
  
- - présent
- faire fonctionner les modules
- developper les premières mécaniques de jeu
- faire apparaitre du texte dans le jeu pour changer les touches (au lieu du shell)
- débugger le mouvement main 4
+ # présent
+ - faire fonctionner les modules
+ - developper les premières mécaniques de jeu
+ - faire apparaitre du texte dans le jeu pour changer les touches (au lieu du shell)
+ - débugger le mouvement main 4
  
- - futur
- fusionner les versions main 3 et 4
- jouer et s'assurer que le gameplay est amusant/jouable
+ # futur
+ - fusionner les versions main 3 et 4
+ - jouer et s'assurer que le gameplay est amusant/jouable
