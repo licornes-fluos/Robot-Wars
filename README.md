@@ -23,3 +23,18 @@ Robot Wars (nom temporaire?)
 ## Needed to run:
  - latest main file (**main4.1.py** for now, however, the ctrl appears in the shell behind the actual game)
  - assets folder
+
+## Difficultés
+ - passé
+ problèmes de touches (claviers qwerty, azerty)
+ mise en place des attentes esthétiques
+ 
+ - présent
+ faire fonctionner les modules
+ developper les premières mécaniques de jeu
+ faire apparaitre du texte dans le jeu pour changer les touches (au lieu du shell)
+ débugger le mouvement main 4
+ 
+ - futur
+ fusionner les versions main 3 et 4
+ jouer et s'assurer que le gameplay est amusant/jouable
