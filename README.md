@@ -28,16 +28,16 @@ Robot Wars (nom temporaire?)
  ### passé
  - problèmes de touches (claviers qwerty, azerty)
  - mise en place des attentes esthétiques
+ - débugger le mouvement main 4
+ - fusionner les versions main 3 et 4
  
  ### présent
  - faire fonctionner les modules
  - developper les premières mécaniques de jeu
  - faire apparaitre du texte dans le jeu pour changer les touches (au lieu du shell)
- - débugger le mouvement main 4
  - trouver un moyen d'adapter la fenêtre selon la résolution de l'écran (sinon elle peut être trop grande)
  
  ### futur
- - fusionner les versions main 3 et 4
  - jouer et s'assurer que le gameplay est amusant/jouable
  
  ## Aspects techniques
