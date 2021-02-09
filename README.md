@@ -21,7 +21,7 @@ Robot Wars (nom temporaire?)
  - Yuko: s'occupe des attaques
  
 ## Needed to run:
- - latest main file (**main4.1.py** for now, however, the ctrl appears in the shell behind the actual game)
+ - latest main file (**main5.0.py**)
  - assets folder
 
 ## Difficultés
