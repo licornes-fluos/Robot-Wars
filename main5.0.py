@@ -28,11 +28,11 @@ def main():
     player2Keys = {"up":pygame.K_e,"down":pygame.K_d,"left":pygame.K_s,"right":pygame.K_f,"attack":pygame.K_v}
     
     # creates a first player which is purple and adds it to 
-    player1 = Player(Player.PURPLE, 40, 40, size[0]//3*2, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3])
+    player1 = Player(Player.PURPLE, 40, 40, size[0]//3, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3])
     all_sprites_list.add(player1)
     
     # creates second player
-    player2 = Player(Player.GREEN, 40, 40, size[0]//3, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3])
+    player2 = Player(Player.GREEN, 40, 40, size[0]//3*2, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3])
     all_sprites_list.add(player2)
     
     # boolean values will be true if player is going in associated direction, false if not.
