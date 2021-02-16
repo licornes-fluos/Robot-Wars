@@ -2,8 +2,8 @@
 import pygame
 import random
 import time
-from sprites import Player
-from sprites import Direction
+from old_sprites import Player
+from old_sprites import Direction
 
 def main():
     open = True # Boolean for if window is open or closed
@@ -22,9 +22,8 @@ def main():
     pygame.init()
 
     # defining font
-    font = pygame.font.Font('freesansbold.ttf', 70)
+    font = pygame.font.Font('freesansbold.ttf', 67)
 
-    
     # sets size of the screen
     size = (1920, 1080) # width,height
     limit_arena = (241, 115, 115, 115) #size of the arena
@@ -66,7 +65,7 @@ def main():
     textRect_ctrl.center = (middle_box, 700) # postition
     screen.blit(text_ctrl, textRect_ctrl)
 
-    #create text for players
+    #create text for end of text
     text_pl = font.render("the players' keys", True, ecriture)
     textRect_pl = text_pl.get_rect()
     textRect_pl.center = (middle_box, 800) # postition
@@ -95,7 +94,18 @@ def main():
                     if event.key == pygame.K_RCTRL or event.key == pygame.K_LCTRL: # changing key settings on CTRL hit
                         print("changing player 1's keys.")
                         print("press ESC to skip a key.")
-                    
+
+                        # erases what was previously written
+                        pygame.image.load("assets/bg3.png").convert()
+                        screen.blit(background_image, [0, 0])
+
+                        #creates the text to display for the space pharse
+                        text_space = font.render('Changing keys for Player 1', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 510) # postition
+                        screen.blit(text_space, textRect_space)
+                        pygame.display.flip()
+
                         for i in player1Keys: # browses and prints each element in dictionary
                             next_key = False
                             print(i)
