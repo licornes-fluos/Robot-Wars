@@ -104,6 +104,22 @@ def main():
                         textRect_space = text_space.get_rect()
                         textRect_space.center = (middle_box, 510) # postition
                         screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('Press desired keys', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 600) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('in the following order:', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 650) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('UP, DOWN, LEFT,', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 700) # postition
+                        screen.blit(text_space, textRect_space)
+
                         pygame.display.flip()
 
                         for i in player1Keys: # browses and prints each element in dictionary
