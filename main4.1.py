@@ -102,22 +102,27 @@ def main():
                         #creates the text to display for the space pharse
                         text_space = font.render('Changing keys for Player 1', True, ecriture)
                         textRect_space = text_space.get_rect()
-                        textRect_space.center = (middle_box, 510) # postition
+                        textRect_space.center = (middle_box, 420) # postition
                         screen.blit(text_space, textRect_space)
 
                         text_space = font.render('Press desired keys', True, ecriture)
                         textRect_space = text_space.get_rect()
-                        textRect_space.center = (middle_box, 600) # postition
+                        textRect_space.center = (middle_box, 550) # postition
                         screen.blit(text_space, textRect_space)
 
                         text_space = font.render('in the following order:', True, ecriture)
                         textRect_space = text_space.get_rect()
-                        textRect_space.center = (middle_box, 650) # postition
+                        textRect_space.center = (middle_box, 630) # postition
                         screen.blit(text_space, textRect_space)
 
                         text_space = font.render('UP, DOWN, LEFT,', True, ecriture)
                         textRect_space = text_space.get_rect()
-                        textRect_space.center = (middle_box, 700) # postition
+                        textRect_space.center = (middle_box, 710) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('RIGHT, ATTACK', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 790) # postition
                         screen.blit(text_space, textRect_space)
 
                         pygame.display.flip()
@@ -136,7 +141,42 @@ def main():
 
                         print("changing player 2's keys.")
                         print("press ESC to skip a key.")
+                        # erases what was previously written
+                        pygame.image.load("assets/bg3.png").convert()
+                        screen.blit(background_image, [0, 0])
 
+                        #creates the text to display for the space pharse
+                        text_space = font.render('Changing keys for Player 2', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 420) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('Press desired keys', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 550) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('in the following order:', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 630) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('UP, DOWN, LEFT,', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 710) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('RIGHT, ATTACK', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 790) # postition
+                        screen.blit(text_space, textRect_space)
+                        
+                        text_space = font.render('Space to play', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 920) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        pygame.display.flip()
                         for i in player2Keys: # same things for player 2
                             next_key = False
                             print(i)
