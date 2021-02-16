@@ -14,7 +14,7 @@ def main():
     pygame.init()
     
     # sets size of the screen
-    size = (1280, 720) # width,height
+    size = (1920, 1080) # width,height
     limit_arena = (241, 115, 115, 115) #size of the arena
     screen = pygame.display.set_mode(size) #sets size of popup window
 
