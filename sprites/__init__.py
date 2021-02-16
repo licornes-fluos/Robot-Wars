@@ -1,2 +1,2 @@
 from .player import Player
-from .player import Direction
+#from .player import Move

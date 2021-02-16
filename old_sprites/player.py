@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 import pygame
+import random
 import time
+from enum import Enum
+
+class Direction(Enum):
+    Stopped = 0
+    Up = 1
+    Down = 2
+    Left = 3
+    Right = 4
 
 class Player(pygame.sprite.Sprite):
     '''
@@ -12,7 +21,7 @@ class Player(pygame.sprite.Sprite):
     PURPLE   = (150, 0, 255)
     BLACK    = (   0,   0,   0)
     WHITE    = ( 255, 255, 255)
-    GREEN    = (   0, 220,   150)
+    GREEN    = (   0, 220, 150)
     RED      = ( 255,   0,   0)
     BLUE     = (   0,   0, 255)
 
@@ -45,8 +54,10 @@ class Player(pygame.sprite.Sprite):
         self.arena_left = arena_left
         self.arena_right = arena_right
         # initialises the direction attributes
+        self.direction = Direction.Stopped
 
         self.start = False
+
     # to use an image instead of a colour:
     #def __init__(self):
     
@@ -65,41 +76,23 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
     
+    def start_moving(self, direction):
+        self.direction = direction
+    
+    def stop_moving(self):
+        self.direction = Direction.Stopped
+
+    def move(self):
+        if self.direction == Direction.Stopped:
+            return
+        elif self.direction == Direction.Up and self.rect.y >= self.arena_top :
+            self.rect.y -= 10
+        elif self.direction == Direction.Down and self.rect.y <= self.screen_height - self.height - self.arena_bottom:
+            self.rect.y += 10
+        elif self.direction == Direction.Left and self.rect.x >= 0 + self.arena_left:
+            self.rect.x -= 10
+        elif self.direction == Direction.Right and self.rect.x <= self.screen_width - self.width - self.arena_right:
+            self.rect.x += 10
     
     def start(self):
         self.start = True
-
-# two new classes to separate chunky moving functions from main code ----------------
-# DOES NOT WORK; FUNCTIONS ARE CURRENTLY IN MAIN @ LINE 59
-class Move():
-    def __init__(self):
-        print("a")
-        
-    def move1(movingSpeed):
-        if player1Up and player1.rect.y >= 0 + 120 :
-            player1Facing = "up"
-            player1.rect.y -= movingSpeed
-        if player1Down and player1.rect.y <= size[1]-20 - 70:
-            player1Facing = "down"
-            player1.rect.y += movingSpeed
-        if player1Left and player1.rect.x >= 0 + 90:
-            player1Facing = "left"
-            player1.rect.x -= movingSpeed
-        if player1Right and player1.rect.x <= size[0]-20 - 90:
-            player1Facing = "right"
-            player1.rect.x += movingSpeed
-        
-    def move2(movingSpeed):
-        if player2Up and player2.rect.y >= 0 + 120 :
-            player2Facing = "up"
-            player2.rect.y -= movingSpeed
-        if player2Down and player2.rect.y <= size[1]-20 - 70:
-            player2Facing = "down"
-            player2.rect.y += movingSpeed
-        if player2Left and player2.rect.x >= 0 + 90:
-            player2Facing = "left"
-            player2.rect.x -= movingSpeed
-        if player2Right and player2.rect.x <= size[0]-20 - 90:
-            player2Facing = "right"
-            player2.rect.x += movingSpeed
-# ------------------------------------------------------------------------------------
