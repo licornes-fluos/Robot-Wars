@@ -42,3 +42,5 @@ Robot Wars (nom temporaire?)
  
  ## Aspects techniques
  Nous avons basé notre programme sur la librairie pygame, mais nous avons aussi utilisé la librairie time. Pour ce qui est de la construction du code, on a un code principal qui s'appelle 'main' (avec . et un nombre selon l'avancement et les options du jeu). A partir de là, nous avons créé un module pour les sprites qui s'appelle 'sprite' et nous voulons en créer d'autres pour les différentes parties du programme (comme les bombes et la barre de vie par exemple). Il y a un fichier, 'assets', qui contient les fonds d'écrans du jeu et les images dont nous avons besoin.
+
+### barre_vie appartient à Vazgen
