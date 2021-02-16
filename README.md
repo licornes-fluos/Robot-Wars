@@ -38,6 +38,8 @@ Robot Wars (nom temporaire?)
  - trouver un moyen d'adapter la fenêtre selon la résolution de l'écran (sinon elle peut être trop grande)
  
  ### futur
+ - faire un écran de pause qui permet d'accéder aux paramètres et/ou de revenir au jeu
+ - changer l'image de fond pour que le texte du logo et des attaques soit plus visible
  - jouer et s'assurer que le gameplay est amusant/jouable
  
  ## Aspects techniques
