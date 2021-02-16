@@ -228,7 +228,7 @@ def main():
             all_sprites_list.draw(screen)
             pygame.display.flip()
         
-        Bombs.manageBomb(player1, player2, block_list, player1Attack, player2Attack, all_sprites_list)
+        Bombs.manageBomb(player1, player2, block_list, player1Attack, player2Attack, all_sprites_list) # Calling the function manageBomb in the file Bombs.py
         
         # checks if the player block has collided with anything, 
         #will be used later for the bombs
