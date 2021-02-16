@@ -11,9 +11,19 @@ def main():
     clock = pygame.time.Clock() # Used to manage how fast the screen updates
     clock.tick(60) # 60 fps limit
 
+    # defining colours for the writing
+    ecriture = (236, 121, 250)
+    bg = (74, 34, 141)
+
+    #middle of the box where the text  appears
+    middle_box = 1360 
 
     # Initialize Pygame
     pygame.init()
+
+    # defining font
+    font = pygame.font.Font('freesansbold.ttf', 70)
+
     
     # sets size of the screen
     size = (1920, 1080) # width,height
@@ -40,8 +50,28 @@ def main():
        
     
     #screen.fill(Player.WHITE) # fills window with white
-    background_image = pygame.image.load("assets/firstpage1.png").convert()
+    #creates the background
+    background_image = pygame.image.load("assets/firstpage2.png").convert()
     screen.blit(background_image, [0, 0])
+
+    #creates the text to display for the space pharse
+    text_space = font.render('Press Space to start', True, ecriture)
+    textRect_space = text_space.get_rect()
+    textRect_space.center = (middle_box, 510) # postition
+    screen.blit(text_space, textRect_space)
+
+    #create text for ctrl
+    text_ctrl = font.render('Press Ctrl to change', True, ecriture)
+    textRect_ctrl = text_ctrl.get_rect()
+    textRect_ctrl.center = (middle_box, 700) # postition
+    screen.blit(text_ctrl, textRect_ctrl)
+
+    #create text for players
+    text_pl = font.render("the players' keys", True, ecriture)
+    textRect_pl = text_pl.get_rect()
+    textRect_pl.center = (middle_box, 800) # postition
+    screen.blit(text_pl, textRect_pl)
+
     pygame.display.flip() # updates display window
     
     print("Press SPACE to start.")
@@ -65,7 +95,7 @@ def main():
                     if event.key == pygame.K_RCTRL or event.key == pygame.K_LCTRL: # changing key settings on CTRL hit
                         print("changing player 1's keys.")
                         print("press ESC to skip a key.")
-
+                    
                         for i in player1Keys: # browses and prints each element in dictionary
                             next_key = False
                             print(i)
