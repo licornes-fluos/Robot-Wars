@@ -2,6 +2,8 @@
 import pygame
 import time
 from sprites import Player
+from bombs import Bombs
+#from bombs import class_Bombs
 #from sprites import Move
 
 def main():
@@ -94,6 +96,7 @@ def main():
     
     while open:
     # main event loop
+        
         for event in pygame.event.get(): # User did something
             if event.type == pygame.QUIT: # If user clicked close
                 open = False
@@ -209,12 +212,12 @@ def main():
             move1(player1Speed)
             move2(player2Speed)
             
-            if player1Attack :
-                bomb1.rect.x = player1.rect.x + 5 # le "+5" c'est juste pour centrer la bombe
-                bomb1.rect.y = player1.rect.y + 5
-            if player2Attack :
-                bomb2.rect.x = player2.rect.x + 5
-                bomb2.rect.y = player2.rect.y + 5
+            # if player1Attack :
+            #     bomb1.rect.x = player1.rect.x + 5 # le "+5" c'est juste pour centrer la bombe
+            #     bomb1.rect.y = player1.rect.y + 5
+            # if player2Attack :
+            #     bomb2.rect.x = player2.rect.x + 5
+            #     bomb2.rect.y = player2.rect.y + 5
             
 
             #loads background image
@@ -224,13 +227,15 @@ def main():
             # draws all the sprites
             all_sprites_list.draw(screen)
             pygame.display.flip()
-    
+        
+        Bombs.manageBomb(player1, player2, block_list, player1Attack, player2Attack, all_sprites_list)
+        
         # checks if the player block has collided with anything, 
         #will be used later for the bombs
         #to be modified according to the game, 
         #maybe do not use boolean as it takes the sprite out of block_list
-        blocks_hit_list = pygame.sprite.spritecollide(player1, block_list, True)
-        blocks_hit_list = pygame.sprite.spritecollide(player2, block_list, True)
+        # blocks_hit_list = pygame.sprite.spritecollide(player1, block_list, True)
+        # blocks_hit_list = pygame.sprite.spritecollide(player2, block_list, True)
     
     
     
