@@ -71,7 +71,7 @@ class Player(pygame.sprite.Sprite):
 
 # two new classes to separate chunky moving functions from main code ----------------
 # DOES NOT WORK; FUNCTIONS ARE CURRENTLY IN MAIN @ LINE 59
-class Move():
+"""class Move():
     def __init__(self):
         print("a")
         
@@ -102,4 +102,4 @@ class Move():
         if player2Right and player2.rect.x <= size[0]-20 - 90:
             player2Facing = "right"
             player2.rect.x += movingSpeed
-# ------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------"""
