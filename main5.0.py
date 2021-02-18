@@ -3,6 +3,7 @@ import pygame
 import time
 from sprites import Player
 from bombs import Bombs
+from HP import Barre_vie
 #from bombs import class_Bombs
 #from sprites import Move
 
