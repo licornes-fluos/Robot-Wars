@@ -11,13 +11,24 @@ def main():
     game_start = False # Boolean for if game has been started
     clock = pygame.time.Clock() # Used to manage how fast the screen updates
     clock.tick(30) # 30 fps cap
+    
+    # defining colours for the writing
+    ecriture = (236, 121, 250)
+    bg = (74, 34, 141)
+
+    #middle of the box where the text  appears
+    middle_box = 1360 
 
     # Initialize Pygame
     pygame.init()
-    
+
+    # defining font
+    font = pygame.font.Font('freesansbold.ttf', 67)
+
     # sets size of the screen
     size = (1920, 1080) # width,height
     limit_arena = (241, 115, 115, 115) #size of the arena
+    sprite = (40, 40)
     screen = pygame.display.set_mode(size) #sets size of popup window
 
     # creates a list of 'sprites.' that will contain sprites other than the players
@@ -26,15 +37,15 @@ def main():
     # creates a list of every sprite, only contains the player for now, but will eventually contain the bombs as well
     all_sprites_list = pygame.sprite.Group()
     
-    player1Keys = {"up":pygame.K_i,"down":pygame.K_k,"left":pygame.K_j,"right":pygame.K_l,"attack":pygame.K_n}
-    player2Keys = {"up":pygame.K_e,"down":pygame.K_d,"left":pygame.K_s,"right":pygame.K_f,"attack":pygame.K_v}
+    player1Keys = {"up":pygame.K_e,"down":pygame.K_d,"left":pygame.K_s,"right":pygame.K_f,"attack":pygame.K_v}
+    player2Keys = {"up":pygame.K_i,"down":pygame.K_k,"left":pygame.K_j,"right":pygame.K_k,"attack":pygame.K_n}
     
     # creates a first player which is purple and adds it to 
-    player1 = Player(Player.PURPLE, 40, 40, size[0]//3, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3])
+    player1 = Player(Player.PURPLE, sprite[0], sprite[1], size[0]//3, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3])
     all_sprites_list.add(player1)
     
     # creates second player
-    player2 = Player(Player.GREEN, 40, 40, size[0]//3*2, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3])
+    player2 = Player(Player.GREEN, sprite[0], sprite[1], size[0]//3*2, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3])
     all_sprites_list.add(player2)
     
     # boolean values will be true if player is going in associated direction, false if not.
@@ -58,37 +69,56 @@ def main():
     player2Speed = 10
     
     def move1(movingSpeed):
-        if player1Up and player1.rect.y >= 0 + 120 :
+        if player1Up and player1.rect.y >= limit_arena[0] :
             player1Facing = "up"
             player1.rect.y -= movingSpeed
-        if player1Down and player1.rect.y <= size[1]-20 - 70:
+        if player1Down and player1.rect.y <= size[1] - limit_arena[1] - sprite[0]:
             player1Facing = "down"
             player1.rect.y += movingSpeed
-        if player1Left and player1.rect.x >= 0 + 90:
+        if player1Left and player1.rect.x >= 0 + limit_arena[2]:
             player1Facing = "left"
             player1.rect.x -= movingSpeed
-        if player1Right and player1.rect.x <= size[0]-20 - 90:
+        if player1Right and player1.rect.x <= size[0] - limit_arena[3] - sprite[1]:
             player1Facing = "right"
             player1.rect.x += movingSpeed
         
     def move2(movingSpeed):
-        if player2Up and player2.rect.y >= 0 + 120 :
+        if player2Up and player2.rect.y >= limit_arena[0] :
             player2Facing = "up"
             player2.rect.y -= movingSpeed
-        if player2Down and player2.rect.y <= size[1]-20 - 70:
+        if player2Down and player2.rect.y <= size[1]- limit_arena[1] - sprite[0]:
             player2Facing = "down"
             player2.rect.y += movingSpeed
-        if player2Left and player2.rect.x >= 0 + 90:
+        if player2Left and player2.rect.x >= 0 + limit_arena[2]:
             player2Facing = "left"
             player2.rect.x -= movingSpeed
-        if player2Right and player2.rect.x <= size[0]-20 - 90:
+        if player2Right and player2.rect.x <= size[0]- limit_arena[3] - sprite[1]:
             player2Facing = "right"
             player2.rect.x += movingSpeed
     
     #screen.fill(Player.WHITE) # fills window with white
-    background_image = pygame.image.load("assets/firstpage1.png").convert()
+    background_image = pygame.image.load("assets/firstpage2.png").convert()
     background_image = pygame.transform.scale(background_image, size)
     screen.blit(background_image, [0, 0])
+    
+    #creates the text to display for the space pharse
+    text_space = font.render('Press Space to start', True, ecriture)
+    textRect_space = text_space.get_rect()
+    textRect_space.center = (middle_box, 510) # postition
+    screen.blit(text_space, textRect_space)
+
+    #create text for ctrl
+    text_ctrl = font.render('Press Ctrl to change', True, ecriture)
+    textRect_ctrl = text_ctrl.get_rect()
+    textRect_ctrl.center = (middle_box, 700) # postition
+    screen.blit(text_ctrl, textRect_ctrl)
+
+    #create text for end of text
+    text_pl = font.render("the players' keys", True, ecriture)
+    textRect_pl = text_pl.get_rect()
+    textRect_pl.center = (middle_box, 800) # postition
+    screen.blit(text_pl, textRect_pl)
+
     pygame.display.flip() # updates display window
     
     print("Press SPACE to start.")
@@ -114,6 +144,38 @@ def main():
                         print("changing player 1's keys.")
                         print("press ESC to skip a key.")
 
+                        # erases what was previously written
+                        pygame.image.load("assets/bg3.png").convert()
+                        screen.blit(background_image, [0, 0])
+
+                        #creates the text to display for the space pharse
+                        text_space = font.render('Changing keys for Player 1', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 420) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('Press desired keys', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 550) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('in the following order:', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 630) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('UP, DOWN, LEFT,', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 710) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('RIGHT, ATTACK', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 790) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        pygame.display.flip()
+
                         for i in player1Keys: # browses and prints each element in dictionary
                             next_key = False
                             print(i)
@@ -128,6 +190,43 @@ def main():
 
                         print("changing player 2's keys.")
                         print("press ESC to skip a key.")
+
+                        # erases what was previously written
+                        pygame.image.load("assets/bg3.png").convert()
+                        screen.blit(background_image, [0, 0])
+
+                        #creates the text to display for the space pharse
+                        text_space = font.render('Changing keys for Player 2', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 420) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('Press desired keys', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 550) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('in the following order:', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 630) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('UP, DOWN, LEFT,', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 710) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        text_space = font.render('RIGHT, ATTACK', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 790) # postition
+                        screen.blit(text_space, textRect_space)
+                        
+                        text_space = font.render('Space to play', True, ecriture)
+                        textRect_space = text_space.get_rect()
+                        textRect_space.center = (middle_box, 920) # postition
+                        screen.blit(text_space, textRect_space)
+
+                        pygame.display.flip()
 
                         for i in player2Keys: # same things for player 2
                             next_key = False
