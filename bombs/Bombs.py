@@ -40,7 +40,20 @@ def manageBomb (player1, player2, block_list, player1Attack, player2Attack, all_
 
     '''
     fonction qui prend comme argument player1, player2, block_list, player1Attack, player2Attack, all_sprites_list.
+
     Cette fonction est appelée dans la main loop "while open"
+
+    Elle permet de
+    - créer les bombes
+    - aficher qqchose lorsqu'une bombe touche un joueur
+
+    prochains objectifs
+    - definir quand est-ce qu'on peut poser une nouvelle bombe
+    - mettre en place un compte à rebours
+    - remplacer le carré noir par une image
+    - créer une zone de dégât
+    - relier ce programme au barres de vie (un peu plus tard)
+
     '''
 
         hits1 = pygame.sprite.spritecollide(player1, block_list, False) # list of bombs that hit player 1
