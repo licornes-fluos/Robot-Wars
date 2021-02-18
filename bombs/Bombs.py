@@ -15,7 +15,7 @@ class Bombs(pygame.sprite.Sprite):
     # updates the position of this object by setting the values of rect.x and rect.y
         self.rect = self.image.get_rect()
 
-#
+
 # for event in pygame.event.get(): # User did something
 #
 #     if event.type == pygame.KEYDOWN: # user presses a key
@@ -38,9 +38,14 @@ class Bombs(pygame.sprite.Sprite):
 
 def manageBomb (player1, player2, block_list, player1Attack, player2Attack, all_sprites_list):
 
+    '''
+    fonction qui prend comme argument player1, player2, block_list, player1Attack, player2Attack, all_sprites_list.
+    Cette fonction est appelée dans la main loop "while open"
+    '''
+
         hits1 = pygame.sprite.spritecollide(player1, block_list, False) # list of bombs that hit player 1
         if hits1: # if the list is empty, it won't do anything
-            print('Player1Hit!')
+            print('Player1Hit!') # sera utilisé plus tard pour enlever des points de vie
 
 
         hits2 = pygame.sprite.spritecollide(player2, block_list, False) # list of any sprite from block_list that hit player2
