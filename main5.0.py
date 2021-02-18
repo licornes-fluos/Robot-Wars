@@ -49,6 +49,9 @@ def main():
     player2 = Player(Player.GREEN, sprite[0], sprite[1], size[0]//3*2, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3])
     all_sprites_list.add(player2)
     
+    # create health bar
+    #life_bar1 = Barre_vie.barres(Barre_vie.100, 100, 330, 110, 495, 75)
+
     # boolean values will be true if player is going in associated direction, false if not.
     player1Up = bool()
     player1Down = bool()
@@ -336,7 +339,6 @@ def main():
         #maybe do not use boolean as it takes the sprite out of block_list
         # blocks_hit_list = pygame.sprite.spritecollide(player1, block_list, True)
         # blocks_hit_list = pygame.sprite.spritecollide(player2, block_list, True)
-    
     
     
     # quits window once while loop is closed (open = False)
