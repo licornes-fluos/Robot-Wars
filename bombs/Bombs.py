@@ -46,13 +46,14 @@ def manageBomb (player, block_list, playerAttack, all_sprites_list):
     if hits: # if the list is empty, it won't do anything
         player.hit() # sera utilisé plus tard pour enlever des points de vie
 
-    if player.canPlaceBomb():
-        if playerAttack :
-            # get_rawtime() # in milliseconds
+
+    if playerAttack :
+        if player.canPlaceBomb():
             bomb = Bombs('assets/bomb.png', player.rect) # creates the bomb for the player
             all_sprites_list.add(bomb)
             block_list.add(bomb)
-            #
+
+
 
 # if bomb2.colliderect(player1):
         # print('collision!')

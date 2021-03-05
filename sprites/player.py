@@ -65,10 +65,17 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
     
-    def canPlaceBomb(self): # Tests if player can place bomb
-        return True
+        self.last_shot = pygame.time.get_ticks() # will be used for "def canPlaceBomb"
     
-    def hit(self):
+    
+    def canPlaceBomb(self): # Tests if player can place bomb
+        now = pygame.time.get_ticks()
+        if now - self.last_shot > 5000 : # the delay is defined here
+            self.last_shot = now
+            return True
+        return False
+    
+    def hit(self): # Just to check collisions
         print("Player hit")
     
     def start(self):
