@@ -65,6 +65,11 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
     
+    def canPlaceBomb(self): # Tests if player can place bomb
+        return True
+    
+    def hit(self):
+        print("Player hit")
     
     def start(self):
         self.start = True

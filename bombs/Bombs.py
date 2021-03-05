@@ -1,45 +1,31 @@
 import pygame
 
 class Bombs(pygame.sprite.Sprite):
-    BLACK    = (   0,   0,   0)
 
-    def __init__(self, colour, width, height):
+    def __init__(self, img, rect):
 
         #calls the class (Bombs) constructor, allows the sprite to initialise
         super().__init__()
 
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load(img).convert_alpha()
+        self.image = pygame.transform.scale(self.image,(50,50))
+        self.rect = self.image.get_rect()  # updates the position of this object by setting the values of rect.x and rect.y
+        self.rect = self.rect.move(rect.x, rect.y-15)
+        # print('bomb1')
+
         # creates an image of the block
         # fills it with a colour.
-        self.image = pygame.Surface([width, height])
-        self.image.fill(colour)
-    # updates the position of this object by setting the values of rect.x and rect.y
-        self.rect = self.image.get_rect()
+        # self.image = pygame.Surface([width, height])
+        # self.image.fill(colour)
+        # pygame.Rect(width,height,x,y)
 
 
-# for event in pygame.event.get(): # User did something
-#
-#     if event.type == pygame.KEYDOWN: # user presses a key
-#         if not(game_start):
-#             if game_start:
-#
-#                 if event.key == player1Keys["attack"]:
-#                     player1Attack = True
-#                 if event.key == player2Keys["attack"]:
-#                     player2Attack = True
-#
-#     elif event.type == pygame.KEYUP: # user stops pressing a key
-#         if game_start:
-#
-#             if event.key == player1Keys["attack"]:
-#                 player1Attack = False
-#             if event.key == player2Keys["attack"]:
-#                 player2Attack = False
 
-
-def manageBomb (player1, player2, block_list, player1Attack, player2Attack, all_sprites_list):
+def manageBomb (player, block_list, playerAttack, all_sprites_list):
 
     '''
-    fonction qui prend comme argument player1, player2, block_list, player1Attack, player2Attack, all_sprites_list.
+    fonction qui prend comme argument player, block_list, playerAttack, all_sprites_list.
 
     Cette fonction est appelée dans la main loop "while open"
 
@@ -56,46 +42,21 @@ def manageBomb (player1, player2, block_list, player1Attack, player2Attack, all_
 
     '''
 
-    hits1 = pygame.sprite.spritecollide(player1, block_list, False) # list of bombs that hit player 1
-    if hits1: # if the list is empty, it won't do anything
-        print('Player1Hit!') # sera utilisé plus tard pour enlever des points de vie
+    hits = pygame.sprite.spritecollide(player, block_list, False) # list of bombs that hit player
+    if hits: # if the list is empty, it won't do anything
+        player.hit() # sera utilisé plus tard pour enlever des points de vie
 
-
-    hits2 = pygame.sprite.spritecollide(player2, block_list, False) # list of any sprite from block_list that hit player2
-    if hits2:
-        print('Player2Hit!')
-
-
-    canPlaceBomb1 = True
-    canPlaceBomb2 = True
-
-    if player2Attack :
-        print('bomb2')
-        if canPlaceBomb2 == True :
+    if player.canPlaceBomb():
+        if playerAttack :
             # get_rawtime() # in milliseconds
-            bomb2 = Bombs(Bombs.BLACK, 20, 20) # creates the bomb for the player
-            bomb2.rect.x = player2.rect.x + 5 # Affiche la bombe aux coordonnées du joueur
-            bomb2.rect.y = player2.rect.y + 5 # le "+5" c'est juste pour centrer la bombe
-            block_list.add(bomb2)
-            all_sprites_list.add(bomb2)
+            bomb = Bombs('assets/bomb.png', player.rect) # creates the bomb for the player
+            all_sprites_list.add(bomb)
+            block_list.add(bomb)
+            #
 
-    # if bomb2.colliderect(player1):
+# if bomb2.colliderect(player1):
         # print('collision!')
         # player2.kill()
         # player1.kill()
 
 
-    if player1Attack :
-        print('bomb1')
-        if canPlaceBomb1 == True :
-            # get_rawtime() # in milliseconds
-            bomb1 = Bombs(Bombs.BLACK, 20, 20) # creates the bomb for the player
-            bomb1.rect.x = player1.rect.x + 5 # Affiche la bombe aux coordonnées du joueur
-            bomb1.rect.y = player1.rect.y + 5 # le "+5" c'est juste pour centrer la bombe
-            block_list.add(bomb1)
-            all_sprites_list.add(bomb1)
-
-    # if bomb2.colliderect(player1):
-        # print('collision!')
-        # player2.kill()
-        # player1.kill()
