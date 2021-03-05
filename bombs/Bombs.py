@@ -12,6 +12,7 @@ class Bombs(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image,(50,50))
         self.rect = self.image.get_rect()  # updates the position of this object by setting the values of rect.x and rect.y
         self.rect = self.rect.move(rect.x, rect.y-15)
+        self.timer = pygame.time.get_ticks()
         # print('bomb1')
 
         # creates an image of the block
@@ -20,6 +21,14 @@ class Bombs(pygame.sprite.Sprite):
         # self.image.fill(colour)
         # pygame.Rect(width,height,x,y)
 
+    def explode(self):
+        now = pygame.time.get_ticks()
+
+        if now - self.timer > 3000 : # the delay is defined here
+            # explosion = Explosion(WHITE, 70, self.rect.x, self.rect.y-15) # creates the circle of explosion (it replaces the bomb)
+            # all_sprites_list.add(explosion)
+            # block_list.add(explosion)
+            self.kill()
 
 
 def manageBomb (player, block_list, playerAttack, all_sprites_list):
@@ -34,9 +43,6 @@ def manageBomb (player, block_list, playerAttack, all_sprites_list):
     - aficher qqchose lorsqu'une bombe touche un joueur
 
     prochains objectifs
-    - definir quand est-ce qu'on peut poser une nouvelle bombe
-    - mettre en place un compte à rebours
-    - remplacer le carré noir par une image
     - créer une zone de dégât
     - relier ce programme au barres de vie (un peu plus tard)
 
@@ -45,6 +51,9 @@ def manageBomb (player, block_list, playerAttack, all_sprites_list):
     hits = pygame.sprite.spritecollide(player, block_list, False) # list of bombs that hit player
     if hits: # if the list is empty, it won't do anything
         player.hit() # sera utilisé plus tard pour enlever des points de vie
+
+    for bomb in block_list :
+        bomb.explode()
 
 
     if playerAttack :
@@ -59,5 +68,4 @@ def manageBomb (player, block_list, playerAttack, all_sprites_list):
         # print('collision!')
         # player2.kill()
         # player1.kill()
-
 
