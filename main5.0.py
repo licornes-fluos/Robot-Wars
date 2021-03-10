@@ -50,7 +50,8 @@ def main():
     all_sprites_list.add(player2)
     
     # create health bar
-    #life_bar1 = Barre_vie.barres(Barre_vie.100, 100, 330, 110, 495, 75)
+    life_bar1 = Barre_vie(80, 100, 330, 110, 495, 75)
+    life_bar2 = Barre_vie(70, 100, 1105, 110, 495, 75)
 
     # boolean values will be true if player is going in associated direction, false if not.
     player1Up = bool()
@@ -329,10 +330,12 @@ def main():
             screen.blit(background_image, [0, 0])
             # draws all the sprites
             all_sprites_list.draw(screen)
-            pygame.display.flip()
         
             Bombs.manageBomb(player1, block_list, player1Attack,  all_sprites_list) # Calling the function manageBomb in the file Bombs.py
             Bombs.manageBomb(player2, block_list, player2Attack,  all_sprites_list) # Calling the function manageBomb in the file Bombs.py
+            life_bar1.barres(screen)
+            life_bar2.barres(screen)
+            pygame.display.flip()
 
         
         # checks if the player block has collided with anything, 
