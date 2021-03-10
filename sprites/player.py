@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
     RED      = ( 255,   0,   0)
     BLUE     = (   0,   0, 255)
 
-    def __init__(self, colour, width, height, x, y, screen_width, screen_height, arena_top, arena_bottom, arena_left, arena_right):
+    def __init__(self, colour, width, height, x, y, screen_width, screen_height, arena_top, arena_bottom, arena_left, arena_right, facing, sprite_image):
         '''
         this is a constructor
         in the parameters, there is the colour, the width and the height
@@ -26,15 +26,19 @@ class Player(pygame.sprite.Sprite):
         #calls the class (Sprite) constructor, allows the sprite to initialise 
         super().__init__() 
         
-        # creates an image of the block
-        # fills it with a colour.
-        self.image = pygame.Surface([width, height])
-        self.image.fill(colour) 
-        
         # defines the size of the sprites
         self.width = width
         self.height = height
-
+        
+        self.facing = facing
+        
+        # loads the image
+        self.imagebase = sprite_image
+        # set the white background of the image to transparent colour
+        self.imagebase.set_colorkey()
+        self.imagebase = pygame.transform.scale(self.imagebase,(width,height))
+        self.image = pygame.transform.rotate(self.imagebase,self.facing)
+        
         # defines the height and width of the screen
         self.screen_width = screen_width
         self.screen_height = screen_height
@@ -47,18 +51,7 @@ class Player(pygame.sprite.Sprite):
         # initialises the direction attributes
 
         self.start = False
-    # to use an image instead of a colour:
-    #def __init__(self):
-    
-        # calls the class (Sprite) constructor, allows the sprite to initialise 
-        #super().__init__()
-        
-        # loads the image
-        #self.image = pygame.image.load("player.png").convert()
-        
-        # set the white background of the image to transparent colour
-        #self.image.set_colorkey(WHITE)
-        
+
     # fetches the rectangle object that has the dimensions (of the image)
     # updates the position of this object by setting the values of rect.x and rect.y
         self.rect = self.image.get_rect()
@@ -66,6 +59,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = y
     
         self.last_shot = pygame.time.get_ticks() # will be used for "def canPlaceBomb"
+    
     
     
     def canPlaceBomb(self): # Tests if player can place bomb
