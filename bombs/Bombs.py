@@ -20,7 +20,14 @@ class Explosion(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        
+        self.timer = pygame.time.get_ticks()
 
+    def exploded(self, all_sprites_list, block_list, explosion_list):
+        now = pygame.time.get_ticks()
+
+        if now - self.timer > 3000 : # the delay is defined here
+            self.kill()
 
 class Bombs(pygame.sprite.Sprite):
     WHITE    = ( 255, 255, 255)
@@ -44,40 +51,44 @@ class Bombs(pygame.sprite.Sprite):
         # self.image.fill(colour)
         # pygame.Rect(width,height,x,y)
 
-    def explode(self, all_sprites_list, block_list):
+    def explode(self, all_sprites_list, block_list, explosion_list):
         now = pygame.time.get_ticks()
-
+        # print("boom")
         if now - self.timer > 3000 : # the delay is defined here
             explosion = Explosion(Bombs.WHITE, 70, self.rect.x, self.rect.y-15) # creates the circle of explosion (it replaces the bomb)
             all_sprites_list.add(explosion)
-            # block_list.add(explosion)
-            # self.kill()
+            explosion_list.add(explosion)
+            self.kill()
 
 
-def manageBomb (player, block_list, playerAttack, all_sprites_list):
+def manageBomb (player, block_list, playerAttack, all_sprites_list, explosion_list):
 
     '''
     fonction qui prend comme argument player, block_list, playerAttack, all_sprites_list.
-
     Cette fonction est appelée dans la main loop "while open"
-
     Elle permet de
     - créer les bombes
     - aficher qqchose lorsqu'une bombe touche un joueur
-
+    
     prochains objectifs
-    - créer une zone de dégât
-    - relier ce programme au barres de vie (un peu plus tard)
-
+    - relier ce programme au barres de vie
+    - zone de degat en cercle
+    - enlever les 5 secondes de debut de jeu
+    
     '''
 
-    hits = pygame.sprite.spritecollide(player, block_list, False) # list of bombs that hit player
+    hits = pygame.sprite.spritecollide(player, explosion_list, False) # list of bombs that hit player
     if hits: # if the list is empty, it won't do anything
         player.hit() # sera utilisé plus tard pour enlever des points de vie
 
-    for bomb in block_list :
-        bomb.explode(all_sprites_list, block_list)
 
+    for bomb in block_list :
+        bomb.explode(all_sprites_list, block_list, explosion_list)
+    
+    
+    for explosion in explosion_list :
+        explosion.exploded(all_sprites_list, block_list, explosion_list)
+        
 
     if playerAttack :
         if player.canPlaceBomb():
