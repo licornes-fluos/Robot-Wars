@@ -30,6 +30,28 @@ class Bombs(pygame.sprite.Sprite):
             # block_list.add(explosion)
             self.kill()
 
+            
+           
+class Explosion(pygame.sprite.Sprite):
+    WHITE    = ( 255, 255, 255)
+    def __init__(self, colour, width, x, y):
+        #calls the class (Bombs) constructor, allows the sprite to initialise
+        super().__init__()
+
+        radius = width/2
+        height = width
+        self.image = pygame.Surface([width, height])
+        pygame.draw.circle(self.image, colour, (x,y), radius)
+        # self.image.fill(colour)
+
+        # defines the size of the sprites
+        self.width = width
+        self.height = height
+
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+            
 
 def manageBomb (player, block_list, playerAttack, all_sprites_list):
 
