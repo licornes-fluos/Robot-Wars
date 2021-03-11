@@ -1,6 +1,5 @@
 import pygame
 
-
 class Explosion(pygame.sprite.Sprite):
     WHITE    = ( 255, 255, 255)
     def __init__(self, colour, width, x, y):
