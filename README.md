@@ -15,7 +15,7 @@ Robot Wars (nom temporaire?)
  - Vie du perso et dégâts de la bombe
 
 ## Répartition des rôles
- - Aline: s'occupe de prgrammer la carte
+ - Sauge: s'occupe de prgrammer la carte
  - Rachel: s'occupe des personnages
  - Vazgen: s'occupe du temps de vie et dégâts
  - Yuko: s'occupe des attaques
@@ -30,11 +30,14 @@ Robot Wars (nom temporaire?)
  - mise en place des attentes esthétiques
  - débugger le mouvement main 4
  - fusionner les versions main 3 et 4
+ - faire apparaitre du texte dans le jeu pour changer les touches (au lieu du shell)
+  - faire fonctionner les modules
  
  ### présent
- - faire fonctionner les modules
  - developper les premières mécaniques de jeu
- - faire apparaitre du texte dans le jeu pour changer les touches (au lieu du shell)
+   - bombes qui explosent avec un cercle autour
+   - collision avec le cercle abaisse de 20 HP
+   - <= 0 HP affiche un écran game over
  - trouver un moyen d'adapter la fenêtre selon la résolution de l'écran (sinon elle peut être trop grande)
  
  ### futur
