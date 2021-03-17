@@ -4,12 +4,10 @@ from pygame.locals import *
 import sys
 
 class Barre_vie():
+
     #Ouverture de la fenêtre Pygame
-    fenetre = pygame.display.set_mode((1920,1080))
-    WHITE=(255,255,255)
-    VIE=(236, 121, 250)
-    MORT=(74, 34, 141)
-    def __init__(self, pv, pvmax, xpos, ypos, longu, larg):
+
+    def __init__(self, pv, pvmax, xpos, ypos, longu, larg, c_vie, c_mort):
         super().__init__()
 
         self.pv = pv
@@ -18,17 +16,14 @@ class Barre_vie():
         self.ypos = ypos
         self.longu = longu
         self.larg = larg
-        self.long_perdu=(pvmax-pv)/pvmax*longu
-        self.xpos_perdu=(xpos+longu)-long_perdu
-        self.pygame.draw.rect(fenetre,VIE,(xpos,ypos,longu,larg))
-        self.pygame.draw.rect(fenetre,MORT,(xpos_perdu,ypos,long_perdu,larg))
+        self.long_perdu = (pvmax-pv)/pvmax*longu
+        self.xpos_perdu = (xpos+longu)-self.long_perdu
+        self.c_vie = c_vie
+        self.c_mort = c_mort 
 
-    def barres(self, pv, pvmax, xpos, ypos, longu, larg):
-
-        #BOUCLE INFINIE
-        while True:
-            for event in pygame.event.get():
-                if event.type==QUIT:
-                    pygame.quit()
-                    sys.exit()
-            pygame.display.update()
+    def barres(self, fenetre):
+        WHITE=(255,255,255)
+        VIE=(236, 121, 250)
+        MORT=(74, 34, 141)
+        pygame.draw.rect(fenetre,self.c_vie,(self.xpos,self.ypos,self.longu,self.larg))
+        pygame.draw.rect(fenetre,self.c_mort,(self.xpos_perdu,self.ypos,self.long_perdu,self.larg))
