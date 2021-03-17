@@ -120,22 +120,13 @@ def main():
     screen.blit(background_image, [0, 0])
     
     #creates the text to display for the space pharse
-    text_space = font.render('Press Space to start', True, ecriture)
-    textRect_space = text_space.get_rect()
-    textRect_space.center = (middle_box, 510) # postition
-    screen.blit(text_space, textRect_space)
+    write('Press SPACE to start',510)
 
     #create text for ctrl
-    text_ctrl = font.render('Press Ctrl to change', True, ecriture)
-    textRect_ctrl = text_ctrl.get_rect()
-    textRect_ctrl.center = (middle_box, 700) # postition
-    screen.blit(text_ctrl, textRect_ctrl)
+    write('Press CTRL to change',700)
 
     #create text for end of text
-    text_pl = font.render("the players' keys", True, ecriture)
-    textRect_pl = text_pl.get_rect()
-    textRect_pl.center = (middle_box, 800) # postition
-    screen.blit(text_pl, textRect_pl)
+    write("the players' keys",800)
 
     pygame.display.flip() # updates display window 
     
