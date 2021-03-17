@@ -33,10 +33,13 @@ def main():
     size2 = (150, 150)
     screen = pygame.display.set_mode(size) #sets size of popup window
 
-    # creates a list of 'sprites.' that will contain sprites other than the players
+    # creates a list of 'sprites.' that will contain BOMBS ONLY
     block_list = pygame.sprite.Group()
     
-    # creates a list of every sprite, only contains the player for now, but will eventually contain the bombs as well
+    # creates a list of 'sprites.' that will contain EXPLOSIONS ONLY
+    explosion_list = pygame.sprite.Group()
+    
+    # creates a list of every sprite (explosions and bombs included)
     all_sprites_list = pygame.sprite.Group()
     
     player1Keys = {"up":pygame.K_e,"down":pygame.K_d,"left":pygame.K_s,"right":pygame.K_f,"attack":pygame.K_v}
@@ -282,8 +285,8 @@ def main():
             all_sprites_list.draw(screen)
             pygame.display.flip()
         
-            Bombs.manageBomb(player1, block_list, player1Attack,  all_sprites_list) # Calling the function manageBomb in the file Bombs.py
-            Bombs.manageBomb(player2, block_list, player2Attack,  all_sprites_list) # Calling the function manageBomb in the file Bombs.py
+            Bombs.manageBomb(player1, block_list, player1Attack,  all_sprites_list, explosion_list) # Calling the function manageBomb in the file Bombs.py
+            Bombs.manageBomb(player2, block_list, player2Attack,  all_sprites_list, explosion_list) # Calling the function manageBomb in the file Bombs.py
     
     # quits window once while loop is closed (open = False)
     pygame.quit()
