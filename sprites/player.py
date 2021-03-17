@@ -70,7 +70,7 @@ class Player(pygame.sprite.Sprite):
     
     def canPlaceBomb(self): # Tests if player can place bomb
         now = pygame.time.get_ticks()
-        if now - self.last_shot > 5000 : # the delay is defined here
+        if now - self.last_shot > 1000 : # the delay is defined here
             self.last_shot = now
             return True
         return False

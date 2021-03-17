@@ -1,6 +1,28 @@
 import pygame
 
+class Explosion(pygame.sprite.Sprite):
+    WHITE    = ( 255, 255, 255)
+    def __init__(self, colour, width, x, y):
+        #calls the class (Bombs) constructor, allows the sprite to initialise
+        super().__init__()
+
+        radius = width/2
+        height = width
+        self.image = pygame.Surface([width, height])
+        pygame.draw.circle(self.image, colour, (x,y), radius)
+        # self.image.fill(colour)
+
+        # defines the size of the sprites
+        self.width = width
+        self.height = height
+
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+
 class Bombs(pygame.sprite.Sprite):
+    WHITE    = ( 255, 255, 255)
 
     def __init__(self, img, rect):
 
@@ -21,14 +43,14 @@ class Bombs(pygame.sprite.Sprite):
         # self.image.fill(colour)
         # pygame.Rect(width,height,x,y)
 
-    def explode(self):
+    def explode(self, all_sprites_list, block_list):
         now = pygame.time.get_ticks()
 
         if now - self.timer > 3000 : # the delay is defined here
-            # explosion = Explosion(WHITE, 70, self.rect.x, self.rect.y-15) # creates the circle of explosion (it replaces the bomb)
-            # all_sprites_list.add(explosion)
+            explosion = Explosion(Bombs.WHITE, 70, self.rect.x, self.rect.y-15) # creates the circle of explosion (it replaces the bomb)
+            all_sprites_list.add(explosion)
             # block_list.add(explosion)
-            self.kill()
+            # self.kill()
 
 
 def manageBomb (player, block_list, playerAttack, all_sprites_list):
@@ -53,7 +75,7 @@ def manageBomb (player, block_list, playerAttack, all_sprites_list):
         player.hit() # sera utilisé plus tard pour enlever des points de vie
 
     for bomb in block_list :
-        bomb.explode()
+        bomb.explode(all_sprites_list, block_list)
 
 
     if playerAttack :
@@ -69,3 +91,37 @@ def manageBomb (player, block_list, playerAttack, all_sprites_list):
         # player2.kill()
         # player1.kill()
 
+'''
+# class Explosion(pygame.sprite.Sprite):
+#     WHITE    = ( 255, 255, 255)
+#     def __init__(self, colour, width, x, y):
+#         radius = width/2
+#         height = width
+#         self.image = pygame.Surface([width, height])
+#         pygame.draw.circle(self.image, colour, (x,y), radius)
+#         # self.image.fill(colour)
+#
+#         # defines the size of the sprites
+#         self.width = width
+#         self.height = height
+#
+#         self.rect = self.image.get_rect()
+#         self.rect.x = x
+#         self.rect.y = y
+
+
+<         # creates an image of the block
+<         # fills it with a colour.
+<         # self.image = pygame.Surface([width, height])
+<         # self.image.fill(colour)
+<         # pygame.Rect(width,height,x,y)
+---
+>
+37,39d62
+<     - definir quand est-ce qu'on peut poser une nouvelle bombe
+<     - mettre en place un compte à rebours
+<     - remplacer le carré noir par une image
+55a79,80
+>     # for bomb in block_list :
+>     #     bomb.explode()
+'''
