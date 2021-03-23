@@ -281,16 +281,11 @@ def main():
             all_sprites_list.draw(screen)
             pygame.display.flip()
         
-<<<<<<< HEAD
-            Bombs.manageBomb(player1, block_list, player1Attack,  all_sprites_list, explosion_list) # Calling the function manageBomb in the file Bombs.py
-            Bombs.manageBomb(player2, block_list, player2Attack,  all_sprites_list, explosion_list) # Calling the function manageBomb in the file Bombs.py
-=======
             Bombs.manageBomb(player1, block_list, player1Attack,  all_sprites_list) # Calling the function manageBomb in the file Bombs.py
             Bombs.manageBomb(player2, block_list, player2Attack,  all_sprites_list) # Calling the function manageBomb in the file Bombs.py
             life_bar1.barres(screen)
             life_bar2.barres(screen)
             pygame.display.flip()
->>>>>>> 4604b85 (debut hits)
     
     # quits window once while loop is closed (open = False)
     pygame.quit()
