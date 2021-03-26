@@ -21,7 +21,7 @@ def main():
     resolutions = [(2560,1440),(1920,1080),(1600,900),(1536,864),(1366,768),(1280,720)]
     
     # sets default size of the screen
-    size = (1536,864) # width,height
+    size = resolutions[4] # width,height
     
     screen = pygame.display.set_mode(size) #sets size of popup window
     
@@ -36,7 +36,8 @@ def main():
     # defining font
     font = pygame.font.Font('freesansbold.ttf', resized(67))
     
-    limit_arena = (241, size[1]-241, 115, size[0]-115) #size of the arena
+    #size of the arena. up down left right
+    limit_arena = (resized(240), size[1]-resized(240), resized(115), size[0]-resized(235))
     
     #sets size of player 1 and 2
     size1 = resized(120), resized(120)
