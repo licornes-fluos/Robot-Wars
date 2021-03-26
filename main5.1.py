@@ -21,27 +21,27 @@ def main():
     resolutions = [(2560,1440),(1920,1080),(1600,900),(1536,864),(1366,768),(1280,720)]
     
     # sets default size of the screen
-    size = resolutions[4] # width,height
+    size = resolutions[3] # width,height
     
     screen = pygame.display.set_mode(size) #sets size of popup window
     
     #function to cleanly change "magic numbers" to fit all resolutions
     def resized(x):
-        return int(size[0]/(1920/x))
+        return size[0]/(1920/x)
     
     # defining colours for the writing
     ecriture = (236, 121, 250)
     bg = (74, 34, 141)
 
     # defining font
-    font = pygame.font.Font('freesansbold.ttf', resized(67))
+    font = pygame.font.Font('freesansbold.ttf', int(resized(67)))
     
     #size of the arena. up down left right
-    limit_arena = (resized(240), size[1]-resized(240), resized(115), size[0]-resized(235))
+    limit_arena = (resized(241), size[1]-resized(240), resized(117), size[0]-resized(235))
     
     #sets size of player 1 and 2
-    size1 = resized(120), resized(120)
-    size2 = resized(120), resized(120)
+    size1 = int(resized(120)), int(resized(120))
+    size2 = int(resized(120)), int(resized(120))
 
 
     #middle of the box where the text  appears
@@ -103,6 +103,10 @@ def main():
 
     #create text for end of text
     write("the players' keys",resized(800))
+
+    pygame.mixer.music.load("assets/Simon_Bichbihler_In_the_1980s.mp3")
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play(-1)
 
     pygame.display.flip() # updates display window 
     
