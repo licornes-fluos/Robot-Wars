@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
     RED      = ( 255,   0,   0)
     BLUE     = (   0,   0, 255)
 
-    def __init__(self, colour, width, height, x, y, screen_width, screen_height, arena_top, arena_bottom, arena_left, arena_right, facing, sprite_image):
+    def __init__(self, colour, width, height, x, y, screen_width, screen_height, arena_top, arena_bottom, arena_left, arena_right, facing, sprite_image, speed):
         '''
         this is a constructor
         in the parameters, there is the colour, the width and the height
@@ -31,6 +31,14 @@ class Player(pygame.sprite.Sprite):
         self.height = height
         
         self.facing = facing
+        
+        self.speed = speed
+        
+        self.up = False
+        self.down = False
+        self.left = False
+        self.right = False
+        self.attack = False
         
         # loads the image
         self.imagebase = sprite_image
@@ -60,7 +68,22 @@ class Player(pygame.sprite.Sprite):
     
         self.last_shot = pygame.time.get_ticks() # will be used for "def canPlaceBomb"
     
+    def move(self):
+        if self.up and self.rect.y >= self.arena_top :
+            self.facing = 180
+            self.rect.y -= self.speed
+        if self.down and self.rect.y <= self.arena_bottom:
+            self.facing = 0
+            self.rect.y += self.speed
+        if self.left and self.rect.x >= self.arena_left:
+            self.facing = -90
+            self.rect.x -= self.speed
+        if self.right and self.rect.x <= self.arena_right:
+            self.facing = 90
+            self.rect.x += self.speed
     
+    def updateSpriteImage(self):
+        self.image = pygame.transform.rotate(self.imagebase,self.facing)
     
     def canPlaceBomb(self): # Tests if player can place bomb
         now = pygame.time.get_ticks()
@@ -75,37 +98,3 @@ class Player(pygame.sprite.Sprite):
     def start(self):
         self.start = True
 
-# two new classes to separate chunky moving functions from main code ----------------
-# DOES NOT WORK; FUNCTIONS ARE CURRENTLY IN MAIN @ LINE 59
-"""class Move():
-    def __init__(self):
-        print("a")
-        
-    def move1(movingSpeed):
-        if player1Up and player1.rect.y >= 0 + 120 :
-            player1Facing = "up"
-            player1.rect.y -= movingSpeed
-        if player1Down and player1.rect.y <= size[1]-20 - 70:
-            player1Facing = "down"
-            player1.rect.y += movingSpeed
-        if player1Left and player1.rect.x >= 0 + 90:
-            player1Facing = "left"
-            player1.rect.x -= movingSpeed
-        if player1Right and player1.rect.x <= size[0]-20 - 90:
-            player1Facing = "right"
-            player1.rect.x += movingSpeed
-        
-    def move2(movingSpeed):
-        if player2Up and player2.rect.y >= 0 + 120 :
-            player2Facing = "up"
-            player2.rect.y -= movingSpeed
-        if player2Down and player2.rect.y <= size[1]-20 - 70:
-            player2Facing = "down"
-            player2.rect.y += movingSpeed
-        if player2Left and player2.rect.x >= 0 + 90:
-            player2Facing = "left"
-            player2.rect.x -= movingSpeed
-        if player2Right and player2.rect.x <= size[0]-20 - 90:
-            player2Facing = "right"
-            player2.rect.x += movingSpeed
-# ------------------------------------------------------------------------------------"""
