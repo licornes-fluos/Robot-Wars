@@ -7,38 +7,49 @@ from HP import Barre_vie
 #from bombs import class_Bombs
 #from sprites import Move
 
-def main():
+def main():   
+    # Initialize Pygame
+    pygame.init()
+    
     open = True # Boolean for if window is open or closed
     game_start = False # Boolean for if game has been started
+
     clock = pygame.time.Clock() # Used to manage how fast the screen updates
     clock.tick(30) # 30 fps cap
+    
+    #options for screen resolution to be picked later
+    resolutions = [(2560,1440),(1920,1080),(1600,900),(1536,864),(1366,768),(1280,720)]
+    
+    # sets default size of the screen
+    size = (1536,864) # width,height
+    
+    screen = pygame.display.set_mode(size) #sets size of popup window
+    
+    #function to cleanly change "magic numbers" to fit all resolutions
+    def resized(x):
+        return int(size[0]/(1920/x))
     
     # defining colours for the writing
     ecriture = (236, 121, 250)
     bg = (74, 34, 141)
 
-    #middle of the box where the text  appears
-    middle_box = 1360 
-
-    # Initialize Pygame
-    pygame.init()
-
     # defining font
-    font = pygame.font.Font('freesansbold.ttf', 67)
+    font = pygame.font.Font('freesansbold.ttf', resized(67))
+    
+    limit_arena = (241, size[1]-241, 115, size[0]-115) #size of the arena
+    
+    #sets size of player 1 and 2
+    size1 = resized(120), resized(120)
+    size2 = resized(120), resized(120)
 
-    # sets size of the screen
-    size = (1920, 1080) # width,height
-    limit_arena = (241, 115, 115, 115) #size of the arena
-    size1 = (120, 120)
-    size2 = (150, 150)
-    screen = pygame.display.set_mode(size) #sets size of popup window
 
+    #middle of the box where the text  appears
+    middle_box = resized(1360)
+    
     # creates a list of 'sprites.' that will contain BOMBS ONLY
     block_list = pygame.sprite.Group()
-    
     # creates a list of 'sprites.' that will contain EXPLOSIONS ONLY
     explosion_list = pygame.sprite.Group()
-    
     # creates a list of every sprite (explosions and bombs included)
     all_sprites_list = pygame.sprite.Group()
     
@@ -49,69 +60,28 @@ def main():
     pv_player1 = 100
     pv_player2 = 100
 
-    # create health bar
-    life_bar1 = Barre_vie(pv_player1, 100, 330, 110, 495, 75, (35, 145, 140), (4, 96, 104))
-    life_bar2 = Barre_vie(pv_player2, 100, 1105, 110, 495, 75, (186, 106, 202), (87, 42, 125))
+    # create health bar. (self, pv, pvmax, xpos, ypos, longu, larg, c_vie, c_mort)
+    life_bar1 = Barre_vie(pv_player1, 100, resized(330), resized(110), resized(495), resized(75), (35, 145, 140), (4, 96, 104))
+    life_bar2 = Barre_vie(pv_player2, 100, resized(1105), resized(110), resized(495), resized(75), (186, 106, 202), (87, 42, 125))
 
-    # boolean values will be true if player is going in associated direction, false if not.
-    player1Up = bool()
-    player1Down = bool()
-    player1Left = bool()
-    player1Right = bool()
-    player1Attack = bool()
-    
-    player2Up = bool()
-    player2Down = bool()
-    player2Left = bool()
-    player2Right = bool()
-    player2Attack = bool()
-    
     # string variables for direction players are facing, will be used to direct attacks.
     player1Facing = 90
     player2Facing = -90
     
-    player1Speed = 13
+    player1Speed = 10
     player2Speed = 10
     
     player1ImageBase = pygame.image.load("assets/spider sprite og resolution.png").convert_alpha()
     player2ImageBase = pygame.image.load("assets/tank sprite og resolution.png").convert_alpha()
     
     # creates a first player which is purple and adds it to 
-    player1 = Player(Player.PURPLE, size1[0], size1[1], size[0]//3, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3], player1Facing, player1ImageBase)
+    player1 = Player(Player.PURPLE, size1[0], size1[1], size[0]//3, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3], player1Facing, player1ImageBase, player1Speed)
     all_sprites_list.add(player1)
     
     # creates second player
-    player2 = Player(Player.GREEN, size2[0], size2[1], size[0]//3*2, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3], player2Facing, player2ImageBase)
+    player2 = Player(Player.GREEN, size2[0], size2[1], size[0]//3*2, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3], player2Facing, player2ImageBase, player2Speed)
     all_sprites_list.add(player2)
     
-    def move1(movingSpeed):
-        if player1Up and player1.rect.y >= limit_arena[0] :
-            player1Facing = 180
-            player1.rect.y -= movingSpeed
-        if player1Down and player1.rect.y <= size[1] - limit_arena[1] - size1[0]:
-            player1Facing = 0
-            player1.rect.y += movingSpeed
-        if player1Left and player1.rect.x >= 0 + limit_arena[2]:
-            player1Facing = 180
-            player1.rect.x -= movingSpeed
-        if player1Right and player1.rect.x <= size[0] - limit_arena[3] - size1[1]:
-            player1Facing = 90
-            player1.rect.x += movingSpeed
-        
-    def move2(movingSpeed):
-        if player2Up and player2.rect.y >= limit_arena[0] :
-            player2Facing = 180
-            player2.rect.y -= movingSpeed
-        if player2Down and player2.rect.y <= size[1]- limit_arena[1] - size2[0]:
-            player2Facing = 0
-            player2.rect.y += movingSpeed
-        if player2Left and player2.rect.x >= 0 + limit_arena[2]:
-            player2Facing = 180
-            player2.rect.x -= movingSpeed
-        if player2Right and player2.rect.x <= size[0]- limit_arena[3] - size2[1]:
-            player2Facing = 90
-            player2.rect.x += movingSpeed
-            
     #function to create text to display for the space pharse
     def write(text,coord):
         text_space = font.render(text, True, ecriture)
@@ -125,13 +95,13 @@ def main():
     screen.blit(background_image, [0, 0])
     
     #creates the text to display for the space pharse
-    write('Press SPACE to start',510)
+    write('Press SPACE to start',resized(510))
 
     #create text for ctrl
-    write('Press CTRL to change',700)
+    write('Press CTRL to change',resized(700))
 
     #create text for end of text
-    write("the players' keys",800)
+    write("the players' keys",resized(800))
 
     pygame.display.flip() # updates display window 
     
@@ -158,11 +128,11 @@ def main():
                         screen.blit(background_image, [0, 0])
 
                         #creates the text to display for the space pharse
-                        write('Changing keys for Player 1',420)
-                        write('Change in order:',550)
-                        write('UP, DOWN, LEFT,',630)
-                        write('RIGHT, ATTACK',710)
-                        write('ESCAPE to skip a key',820)
+                        write('Changing keys for Player 1',resized(420))
+                        write('Change in order:',resized(550))
+                        write('UP, DOWN, LEFT,',resized(630))
+                        write('RIGHT, ATTACK',resized(710))
+                        write('ESCAPE to skip a key',resized(820))
 
                         pygame.display.flip()
 
@@ -185,12 +155,12 @@ def main():
                         screen.blit(background_image, [0, 0])
 
                         #creates the text to display for the space pharse
-                        write('Changing keys for Player 2',420)
-                        write('Change in order:',550)
-                        write('UP, DOWN, LEFT,',630)
-                        write('RIGHT, ATTACK',710)
-                        write('ESCAPE to skip a key',820)
-                        write('SPACE to play',920)
+                        write('Changing keys for Player 2',resized(420))
+                        write('Change in order:',resized(550))
+                        write('UP, DOWN, LEFT,',resized(630))
+                        write('RIGHT, ATTACK',resized(710))
+                        write('ESCAPE to skip a key',resized(820))
+                        write('SPACE to play',resized(920))
 
                         pygame.display.flip()
 
@@ -210,83 +180,87 @@ def main():
     
                 else:
                     if event.key == player1Keys["up"]:
-                        player1Up = True
+                        player1.up = True
                     if event.key == player2Keys["up"]:
-                        player2Up = True
+                        player2.up = True
     
                     if event.key == player1Keys["down"]:
-                        player1Down = True
+                        player1.down = True
                     if event.key == player2Keys["down"]:
-                        player2Down = True
+                        player2.down = True
     
                     if event.key == player1Keys["left"]:
-                        player1Left = True
+                        player1.left = True
                     if event.key == player2Keys["left"]:
-                        player2Left = True
+                        player2.left = True
     
                     if event.key == player1Keys["right"]:
-                        player1Right = True
+                        player1.right = True
                     if event.key == player2Keys["right"]:
-                        player2Right = True
+                        player2.right = True
     
                     if event.key == player1Keys["attack"]:
-                        player1Attack = True
+                        player1.attack = True
                     if event.key == player2Keys["attack"]:
-                        player2Attack = True
+                        player2.attack = True
     
             elif event.type == pygame.KEYUP: # user stops pressing a key
                 if game_start:
                     if event.key == player1Keys["up"]:
-                        player1Up = False
+                        player1.up = False
                     if event.key == player2Keys["up"]:
-                        player2Up = False
+                        player2.up = False
     
                     if event.key == player1Keys["down"]:
-                        player1Down = False
+                        player1.down = False
                     if event.key == player2Keys["down"]:
-                        player2Down = False
+                        player2.down = False
     
                     if event.key == player1Keys["left"]:
-                        player1Left = False
+                        player1.left = False
                     if event.key == player2Keys["left"]:
-                        player2Left = False
+                        player2.left = False
     
                     if event.key == player1Keys["right"]:
-                        player1Right = False
+                        player1.right = False
                     if event.key == player2Keys["right"]:
-                        player2Right = False
+                        player2.right = False
     
                     if event.key == player1Keys["attack"]:
-                        player1Attack = False
+                        player1.attack = False
                     if event.key == player2Keys["attack"]:
-                        player2Attack = False
+                        player2.attack = False
     
     
         # --- Game logic
 
         if game_start:
+            
             # defines how many milliseconds until next frame update
             pygame.time.delay(5)
             
             # calls tests from functions up top
-            move1(player1Speed)
-            move2(player2Speed)
+            player1.move()
+            player2.move()
             
             #loads background image
             background_image = pygame.image.load("assets/bg3.png").convert()
             background_image = pygame.transform.scale(background_image, size)
             screen.blit(background_image, [0, 0])
             
+            player1.updateSpriteImage()
+            player2.updateSpriteImage()
+            
             # draws all the sprites
             all_sprites_list.draw(screen)
-            pygame.display.flip()
+
         
-            Bombs.manageBomb(player1, block_list, player1Attack,  all_sprites_list, explosion_list) # Calling the function manageBomb in the file Bombs.py
-            Bombs.manageBomb(player2, block_list, player2Attack,  all_sprites_list, explosion_list) # Calling the function manageBomb in the file Bombs.py
+            Bombs.manageBomb(player1, block_list, player1.attack,  all_sprites_list, explosion_list) # Calling the function manageBomb in the file Bombs.py
+            Bombs.manageBomb(player2, block_list, player2.attack,  all_sprites_list, explosion_list) # Calling the function manageBomb in the file Bombs.py
             life_bar1.barres(screen)
             life_bar2.barres(screen)
+            
             pygame.display.flip()
-
     # quits window once while loop is closed (open = False)
     pygame.quit()
 
