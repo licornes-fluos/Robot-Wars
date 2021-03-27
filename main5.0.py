@@ -45,8 +45,13 @@ def main():
     player1Keys = {"up":pygame.K_e,"down":pygame.K_d,"left":pygame.K_s,"right":pygame.K_f,"attack":pygame.K_v}
     player2Keys = {"up":pygame.K_i,"down":pygame.K_k,"left":pygame.K_j,"right":pygame.K_l,"attack":pygame.K_n}
     
+    # health of player
+    pv_player1 = 100
+    pv_player2 = 100
+
     # create health bar
-    #life_bar1 = Barre_vie.barres(Barre_vie.100, 100, 330, 110, 495, 75)
+    life_bar1 = Barre_vie(pv_player1, 100, 330, 110, 495, 75, (35, 145, 140), (4, 96, 104))
+    life_bar2 = Barre_vie(pv_player2, 100, 1105, 110, 495, 75, (186, 106, 202), (87, 42, 125))
 
     # boolean values will be true if player is going in associated direction, false if not.
     player1Up = bool()
@@ -276,8 +281,11 @@ def main():
             all_sprites_list.draw(screen)
             pygame.display.flip()
         
-            Bombs.manageBomb(player1, block_list, player1Attack,  all_sprites_list, explosion_list) # Calling the function manageBomb in the file Bombs.py
-            Bombs.manageBomb(player2, block_list, player2Attack,  all_sprites_list, explosion_list) # Calling the function manageBomb in the file Bombs.py
+            Bombs.manageBomb(player1, block_list, player1Attack,  all_sprites_list) # Calling the function manageBomb in the file Bombs.py
+            Bombs.manageBomb(player2, block_list, player2Attack,  all_sprites_list) # Calling the function manageBomb in the file Bombs.py
+            life_bar1.barres(screen)
+            life_bar2.barres(screen)
+            pygame.display.flip()
     
     # quits window once while loop is closed (open = False)
     pygame.quit()
