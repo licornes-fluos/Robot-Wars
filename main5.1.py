@@ -17,11 +17,8 @@ def main():
     clock = pygame.time.Clock() # Used to manage how fast the screen updates
     clock.tick(30) # 30 fps cap
     
-    #options for screen resolution to be picked later
-    resolutions = [(2560,1440),(1920,1080),(1600,900),(1536,864),(1366,768),(1280,720)]
-    
-    # sets default size of the screen
-    size = resolutions[3] # width,height
+    # sets size of the screen
+    size = (int(pygame.display.Info().current_w),int((pygame.display.Info().current_w*9)/16)) # width,height
     
     screen = pygame.display.set_mode(size) #sets size of popup window
     
