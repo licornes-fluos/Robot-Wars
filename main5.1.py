@@ -4,8 +4,6 @@ import time
 from sprites import Player
 from bombs import Bombs
 from HP import Barre_vie
-#from bombs import class_Bombs
-#from sprites import Move
 
 def main():   
     # Initialize Pygame
@@ -50,7 +48,8 @@ def main():
     explosion_list = pygame.sprite.Group()
     # creates a list of every sprite (explosions and bombs included)
     all_sprites_list = pygame.sprite.Group()
-    
+
+    # setting keys to play
     player1Keys = {"up":pygame.K_e,"down":pygame.K_d,"left":pygame.K_s,"right":pygame.K_f,"attack":pygame.K_v}
     player2Keys = {"up":pygame.K_i,"down":pygame.K_k,"left":pygame.K_j,"right":pygame.K_l,"attack":pygame.K_n}
     
@@ -58,10 +57,7 @@ def main():
     pv_player1 = 100
     pv_player2 = 100
 
-    # create health bar. (self, pv, pvmax, xpos, ypos, longu, larg, c_vie, c_mort)
-    life_bar1 = Barre_vie(pv_player1, 100, resized(330), resized(110), resized(495), resized(75), (35, 145, 140), (4, 96, 104))
-    life_bar2 = Barre_vie(pv_player2, 100, resized(1105), resized(110), resized(495), resized(75), (186, 106, 202), (87, 42, 125))
-
+    
     # string variables for direction players are facing, will be used to direct attacks.
     player1Facing = 90
     player2Facing = -90
@@ -79,7 +75,7 @@ def main():
     # creates second player
     player2 = Player(Player.GREEN, size2[0], size2[1], size[0]//3*2, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3], player2Facing, player2ImageBase, player2Speed)
     all_sprites_list.add(player2)
-    
+
     #function to create text to display for the space pharse
     def write(text,coord):
         text_space = font.render(text, True, ecriture)
@@ -101,7 +97,7 @@ def main():
     #create text for end of text
     write("the players' keys",resized(800))
 
-    pygame.mixer.music.load("assets/Simon_Bichbihler_In_the_1980s.mp3")
+    pygame.mixer.music.load("assets/Simon_Bichbihler_In_the_1980s.ogg")
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(-1)
 
@@ -256,6 +252,21 @@ def main():
             # draws all the sprites
             all_sprites_list.draw(screen)
 
+            hits1 = pygame.sprite.spritecollide(player1, explosion_list, False) # list of bombs that hit player
+            if hits1: # if the list is empty, it won't do anything
+                pv_player1 -= 20
+                time.sleep(3) ## A MODIFIER
+    
+
+            hits2 = pygame.sprite.spritecollide(player2, explosion_list, False) # list of bombs that hit player
+            if hits2: # if the list is empty, it won't do anything
+                pv_player2 -= 20
+                time.sleep(3) ## A MODIFIER
+    
+            # create health bar. (self, pv, pvmax, xpos, ypos, longu, larg, c_vie, c_mort)
+            life_bar1 = Barre_vie(pv_player1, 100, resized(330), resized(110), resized(495), resized(75), (35, 145, 140), (4, 96, 104))
+            life_bar2 = Barre_vie(pv_player2, 100, resized(1105), resized(110), resized(495), resized(75), (186, 106, 202), (87, 42, 125))
+
         
 
             Bombs.manageBomb(player1, block_list, player1.attack,  all_sprites_list, explosion_list, resized(250)) # Calling the function manageBomb in the file Bombs.py
@@ -264,7 +275,14 @@ def main():
             life_bar2.barres(screen)
             
             pygame.display.flip()
-    # quits window once while loop is closed (open = False)
+
+            if pv_player1 <= 0:
+                open = False
+            elif pv_player2 <= 0:
+                open = False
+            elif pv_player1 and pv_player2 == 0:
+                open = False
+    # quits window once while loop is closed (open = False)  ## A MODIFIER
     pygame.quit()
 
 if __name__ == '__main__': #avoid running main code when loaded as a module
