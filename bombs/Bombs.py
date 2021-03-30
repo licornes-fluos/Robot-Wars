@@ -57,6 +57,10 @@ class Bombs(pygame.sprite.Sprite):
         # print("boom")
         if now - self.timer > 3000 : # the delay is defined here
             explosion = Explosion(Bombs.PURPLE, 250, self.rect.x, self.rect.y-15) # creates the circle of explosion (it replaces the bomb)
+<<<<<<< HEAD
+=======
+            # print('bombed')
+>>>>>>> 01cc950 (the game ends)
             all_sprites_list.add(explosion)
             explosion_list.add(explosion)
             self.kill()

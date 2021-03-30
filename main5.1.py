@@ -254,34 +254,52 @@ def main():
 
             hits1 = pygame.sprite.spritecollide(player1, explosion_list, False) # list of bombs that hit player
             if hits1: # if the list is empty, it won't do anything
-                pv_player1 -= 20
-                time.sleep(3) ## A MODIFIER
+                pv_player1 -= 100
+                time.sleep(1) ## A MODIFIER
     
 
             hits2 = pygame.sprite.spritecollide(player2, explosion_list, False) # list of bombs that hit player
             if hits2: # if the list is empty, it won't do anything
-                pv_player2 -= 20
-                time.sleep(3) ## A MODIFIER
+                pv_player2 -= 100
+                time.sleep(1) ## A MODIFIER
     
             # create health bar. (self, pv, pvmax, xpos, ypos, longu, larg, c_vie, c_mort)
             life_bar1 = Barre_vie(pv_player1, 100, resized(330), resized(110), resized(495), resized(75), (35, 145, 140), (4, 96, 104))
             life_bar2 = Barre_vie(pv_player2, 100, resized(1105), resized(110), resized(495), resized(75), (186, 106, 202), (87, 42, 125))
-
-        
 
             Bombs.manageBomb(player1, block_list, player1.attack,  all_sprites_list, explosion_list, resized(250)) # Calling the function manageBomb in the file Bombs.py
             Bombs.manageBomb(player2, block_list, player2.attack,  all_sprites_list, explosion_list, resized(250)) # Calling the function manageBomb in the file Bombs.py
             life_bar1.barres(screen)
             life_bar2.barres(screen)
             
+
+            if pv_player1 <= 0 or pv_player2 <= 0:
+                # end of the game background
+                end_bg = pygame.image.load("assets/end2.png").convert()
+                end_bg = pygame.transform.scale(end_bg, size)
+                screen.blit(end_bg, [0, 0])
+                middle_box = resized(1450) # for the position of the following text
+
+                # determins which player won and writes it
+                if pv_player1 <= 0 and pv_player2 <= 0:
+                    write("It's a tie!",resized(550))
+                elif pv_player2 <= 0:
+                    write('Player 2 won!',resized(550))
+                else:
+                    write("Player 1 won!",resized(550))
+                
+                # options at the end of the game
+                #for event in pygame.event.get():
+                #    if event.type == pygame.KEYDOWN:
+                #        if event.type == pygame.K_SPACE: # pressing space starts the game
+                #            print('new game')
+                #            game_start = True
+                #        elif event.type == pygame.K_q and pygame.key.get_mods() & pygame.KMOD_SHIFT: #quiting the game
+                #            print('end game')
+                #            pygame.quit()
+
             pygame.display.flip()
 
-            if pv_player1 <= 0:
-                open = False
-            elif pv_player2 <= 0:
-                open = False
-            elif pv_player1 and pv_player2 == 0:
-                open = False
     # quits window once while loop is closed (open = False)  ## A MODIFIER
     pygame.quit()
 
