@@ -257,8 +257,9 @@ def main():
             all_sprites_list.draw(screen)
 
         
-            Bombs.manageBomb(player1, block_list, player1.attack,  all_sprites_list, explosion_list) # Calling the function manageBomb in the file Bombs.py
-            Bombs.manageBomb(player2, block_list, player2.attack,  all_sprites_list, explosion_list) # Calling the function manageBomb in the file Bombs.py
+
+            Bombs.manageBomb(player1, block_list, player1.attack,  all_sprites_list, explosion_list, resized(250)) # Calling the function manageBomb in the file Bombs.py
+            Bombs.manageBomb(player2, block_list, player2.attack,  all_sprites_list, explosion_list, resized(250)) # Calling the function manageBomb in the file Bombs.py
             life_bar1.barres(screen)
             life_bar2.barres(screen)
             
