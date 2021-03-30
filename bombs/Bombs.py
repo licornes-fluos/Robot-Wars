@@ -6,10 +6,10 @@ class Explosion(pygame.sprite.Sprite):
     def __init__(self, colour, width, x, y):
         #calls the class (Bombs) constructor, allows the sprite to initialise
         super().__init__()
-        
+
         PURPLE = (150, 131, 236)
         RANDOM = ( 220, 5, 50)
-        
+
 
         radius = width/2
         height = width
@@ -24,7 +24,7 @@ class Explosion(pygame.sprite.Sprite):
 
         self.timer = pygame.time.get_ticks()
 
-    def exploded(self, all_sprites_list, block_list, explosion_list):
+    def exploded(self, all_sprites_list, block_list, explosion_list, size):
         now = pygame.time.get_ticks()
 
         if now - self.timer > 3000 : # the delay is defined here
@@ -52,18 +52,18 @@ class Bombs(pygame.sprite.Sprite):
         # self.image.fill(colour)
         # pygame.Rect(width,height,x,y)
 
-    def explode(self, all_sprites_list, block_list, explosion_list):
+    def explode(self, all_sprites_list, block_list, explosion_list, size):
         now = pygame.time.get_ticks()
         # print("boom")
         if now - self.timer > 3000 : # the delay is defined here
-            explosion = Explosion(Bombs.PURPLE, 250, self.rect.x, self.rect.y-15) # creates the circle of explosion (it replaces the bomb)
-            print('bombed')
+            explosion = Explosion(Bombs.PURPLE, size, self.rect.x, self.rect.y-15) # creates the circle of explosion (it replaces the bomb)
+            # print('bombed')
             all_sprites_list.add(explosion)
             explosion_list.add(explosion)
             self.kill()
 
 
-def manageBomb (player, block_list, playerAttack, all_sprites_list, explosion_list):
+def manageBomb (player, block_list, playerAttack, all_sprites_list, explosion_list, size):
 
     '''
     fonction qui prend comme argument player, block_list, playerAttack, all_sprites_list.
@@ -77,21 +77,22 @@ def manageBomb (player, block_list, playerAttack, all_sprites_list, explosion_li
     - centrer la zone de dégat
     - zone de degat aleatoire (option)
     - COMMENTER ET AERER
-    
+
     '''
 
     hits = pygame.sprite.spritecollide(player, explosion_list, False) # list of bombs that hit player
     if hits: # if the list is empty, it won't do anything
-        print("playerhit") # sera utilisé plus tard pour enlever des points de vie
-        # player1.hp -= 25
+        None
+
 
 
     for bomb in block_list :
-        bomb.explode(all_sprites_list, block_list, explosion_list)
+        bomb.explode(all_sprites_list, block_list, explosion_list, size)
 
 
     for explosion in explosion_list :
-        explosion.exploded(all_sprites_list, block_list, explosion_list)
+        explosion.exploded(all_sprites_list, block_list, explosion_list, size)
+
 
 
     if playerAttack :
@@ -99,4 +100,3 @@ def manageBomb (player, block_list, playerAttack, all_sprites_list, explosion_li
             bomb = Bombs('assets/bomb.png', player.rect) # creates the bomb for the player
             all_sprites_list.add(bomb)
             block_list.add(bomb)
-
