@@ -19,11 +19,13 @@ class Barre_vie():
         self.long_perdu = (pvmax-pv)/pvmax*longu
         self.xpos_perdu = (xpos+longu)-self.long_perdu
         self.c_vie = c_vie
-        self.c_mort = c_mort 
+        self.c_mort = c_mort
 
     def barres(self, fenetre):
         WHITE=(255,255,255)
         VIE=(236, 121, 250)
         MORT=(74, 34, 141)
-        pygame.draw.rect(fenetre,self.c_vie,(self.xpos,self.ypos,self.longu,self.larg))
-        pygame.draw.rect(fenetre,self.c_mort,(self.xpos_perdu,self.ypos,self.long_perdu,self.larg))
+        if self.pv >= 0:
+            pygame.draw.rect(fenetre,self.c_vie,(self.xpos,self.ypos,self.longu,self.larg))
+        else:
+            self.pv = 0
