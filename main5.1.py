@@ -252,6 +252,13 @@ def main():
             # draws all the sprites
             all_sprites_list.draw(screen)
 
+            # Need to modify the hit part
+            # Because the the time.sleep() stops the whole program
+            # And without it, the players lose more than 20pts of their life
+            # We need the player to only lose pv_player once
+            # So that it only looses the number of points we want it to lose
+         
+        
             hits1 = pygame.sprite.spritecollide(player1, explosion_list, False) # list of bombs that hit player
             if hits1: # if the list is empty, it won't do anything
                 pv_player1 -= 20
@@ -267,21 +274,41 @@ def main():
             life_bar1 = Barre_vie(pv_player1, 100, resized(330), resized(110), resized(495), resized(75), (35, 145, 140), (4, 96, 104))
             life_bar2 = Barre_vie(pv_player2, 100, resized(1105), resized(110), resized(495), resized(75), (186, 106, 202), (87, 42, 125))
 
-        
-
             Bombs.manageBomb(player1, block_list, player1.attack,  all_sprites_list, explosion_list, resized(250)) # Calling the function manageBomb in the file Bombs.py
             Bombs.manageBomb(player2, block_list, player2.attack,  all_sprites_list, explosion_list, resized(250)) # Calling the function manageBomb in the file Bombs.py
             life_bar1.barres(screen)
             life_bar2.barres(screen)
             
+
+            if pv_player1 <= 0 or pv_player2 <= 0:
+                # end of the game background
+                end_bg = pygame.image.load("assets/end2.png").convert()
+                end_bg = pygame.transform.scale(end_bg, size)
+                screen.blit(end_bg, [0, 0])
+                middle_box = resized(1450) # for the position of the following text
+
+                # determins which player won and writes it
+                if pv_player1 <= 0 and pv_player2 <= 0:
+                    write("It's a tie!",resized(550))
+                elif pv_player2 <= 0:
+                    write('Player 1 won!',resized(550))
+                else:
+                    write("Player 2 won!",resized(550))
+                
+                # options at the end of the game
+                # writing the options
+                write("To replay, press 'space'", resized(900))
+                write("To quit the game, press 'q'", resized(970))
+                # the actual options
+                for event in pygame.event.get():
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE: # pressing space starts the game
+                            main()
+                        elif event.key == pygame.K_q: #pressing 'q' to quit the game
+                            open = False
+
             pygame.display.flip()
 
-            if pv_player1 <= 0:
-                open = False
-            elif pv_player2 <= 0:
-                open = False
-            elif pv_player1 and pv_player2 == 0:
-                open = False
     # quits window once while loop is closed (open = False)  ## A MODIFIER
     pygame.quit()
 
