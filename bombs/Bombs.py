@@ -19,8 +19,8 @@ class Explosion(pygame.sprite.Sprite):
         pygame.draw.circle(self.image, PURPLE, (width/2,width/2), radius)
 
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.rect.x = x-radius
+        self.rect.y = y-radius
 
         self.timer = pygame.time.get_ticks()
 
@@ -44,6 +44,8 @@ class Bombs(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()  # updates the position of this object by setting the values of rect.x and rect.y
         self.rect = self.rect.move(rect.x, rect.y-15)
         self.timer = pygame.time.get_ticks()
+        self.bombsize = 50
+        self.placement_adjust = self.bombsize/2
         # print('bomb1')
 
         # creates an image of the block
@@ -56,7 +58,7 @@ class Bombs(pygame.sprite.Sprite):
         now = pygame.time.get_ticks()
         # print("boom")
         if now - self.timer > 3000 : # the delay is defined here
-            explosion = Explosion(Bombs.PURPLE, 250, self.rect.x, self.rect.y-15) # creates the circle of explosion (it replaces the bomb)
+            explosion = Explosion(Bombs.PURPLE, 250, self.rect.x+self.placement_adjust, self.rect.y+self.placement_adjust) # creates the circle of explosion (it replaces the bomb)
             # print('bombed')
             all_sprites_list.add(explosion)
             explosion_list.add(explosion)
@@ -70,11 +72,9 @@ def manageBomb (player, block_list, playerAttack, all_sprites_list, explosion_li
     Cette fonction est appelée dans la main loop "while open"
     Elle permet de
     - créer les bombes
-    - aficher qqchose lorsqu'une bombe touche un joueur
+    - afficher qqchose lorsqu'une bombe touche un joueur
 
     prochains objectifs
-    - relier ce programme au barres de vie
-    - centrer la zone de dégat
     - zone de degat aleatoire (option)
     - COMMENTER ET AERER
 

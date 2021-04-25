@@ -252,24 +252,18 @@ def main():
             # draws all the sprites
             all_sprites_list.draw(screen)
 
-            # Need to modify the hit part
-            # Because the the time.sleep() stops the whole program
-            # And without it, the players lose more than 20pts of their life
-            # We need the player to only lose pv_player once
-            # So that it only looses the number of points we want it to lose
-         
-        
-            hits1 = pygame.sprite.spritecollide(player1, explosion_list, False) # list of bombs that hit player
+            player1_possible_explosions = player1.differenceExplosions(explosion_list)
+            hits1 = pygame.sprite.spritecollide(player1, player1_possible_explosions, False) # list of bombs that hit player
             if hits1: # if the list is empty, it won't do anything
                 pv_player1 -= 20
-                time.sleep(3) ## A MODIFIER
-    
-
-            hits2 = pygame.sprite.spritecollide(player2, explosion_list, False) # list of bombs that hit player
+                player1.addExplosionHits(hits1)
+            
+            player2_possible_explosions = player2.differenceExplosions(explosion_list)
+            hits2 = pygame.sprite.spritecollide(player2, player2_possible_explosions, False) # list of bombs that hit player
             if hits2: # if the list is empty, it won't do anything
                 pv_player2 -= 20
-                time.sleep(3) ## A MODIFIER
-    
+                player2.addExplosionHits(hits2)
+
             # create health bar. (self, pv, pvmax, xpos, ypos, longu, larg, c_vie, c_mort)
             life_bar1 = Barre_vie(pv_player1, 100, resized(330), resized(110), resized(495), resized(75), (35, 145, 140), (4, 96, 104))
             life_bar2 = Barre_vie(pv_player2, 100, resized(1105), resized(110), resized(495), resized(75), (186, 106, 202), (87, 42, 125))
@@ -278,7 +272,6 @@ def main():
             Bombs.manageBomb(player2, block_list, player2.attack,  all_sprites_list, explosion_list, resized(250)) # Calling the function manageBomb in the file Bombs.py
             life_bar1.barres(screen)
             life_bar2.barres(screen)
-            
 
             if pv_player1 <= 0 or pv_player2 <= 0:
                 # end of the game background
