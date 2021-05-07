@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
     RED      = ( 255,   0,   0)
     BLUE     = (   0,   0, 255)
 
-    def __init__(self, colour, width, height, x, y, screen_width, screen_height, arena_top, arena_bottom, arena_left, arena_right, facing, sprite_image, speed):
+    def __init__(self, colour, width, height, x, y, screen_width, screen_height, arena_top, arena_bottom, arena_left, arena_right, facing, sprite_image, speed, hp):
         '''
         this is a constructor
         in the parameters, there is the colour, the width and the height
@@ -56,7 +56,8 @@ class Player(pygame.sprite.Sprite):
         self.arena_bottom = arena_bottom
         self.arena_left = arena_left
         self.arena_right = arena_right
-        # initialises the direction attributes
+        
+        self.hp = hp
 
         self.start = False
 
@@ -69,7 +70,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = y
     
         self.last_shot = pygame.time.get_ticks() # will be used for "def canPlaceBomb"
-    
+        
     def move(self):
         if self.up and self.rect.y >= self.arena_top :
             self.facing = 180
