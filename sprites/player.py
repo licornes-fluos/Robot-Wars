@@ -34,17 +34,22 @@ class Player(pygame.sprite.Sprite):
         
         self.speed = speed
         
+        # not moving or attacking yet
         self.up = False
         self.down = False
         self.left = False
         self.right = False
         self.attack = False
+        self.speed_boost = False
         
         # loads the image
         self.imagebase = sprite_image
+        
         # set the white background of the image to transparent colour
         self.imagebase.set_colorkey()
+        # base image set to width and height defined above
         self.imagebase = pygame.transform.scale(self.imagebase,(width,height))
+        # image rotated depending on where robot is facing
         self.image = pygame.transform.rotate(self.imagebase,self.facing)
         
         # defines the height and width of the screen

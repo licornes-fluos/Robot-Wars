@@ -20,9 +20,9 @@ Robot Wars (nom temporaire?)
  - Vazgen: s'occupe du temps de vie et dégâts
  - Yuko: s'occupe des attaques
  
-## Needed to run:
- - latest main file (**main5.0.py**)
- - assets folder
+## Besoin pour jouer:
+ - Repository entier
+ - Exécuter le DERNIER fichier main
 
 ## Difficultés
  ### passé
@@ -31,19 +31,18 @@ Robot Wars (nom temporaire?)
  - débugger le mouvement main 4
  - fusionner les versions main 3 et 4
  - faire apparaitre du texte dans le jeu pour changer les touches (au lieu du shell)
-  - faire fonctionner les modules
- 
- ### présent
+ - faire fonctionner les modules
  - developper les premières mécaniques de jeu
    - bombes qui explosent avec un cercle autour
    - collision avec le cercle abaisse de 20 HP
    - <= 0 HP affiche un écran game over
  - trouver un moyen d'adapter la fenêtre selon la résolution de l'écran (sinon elle peut être trop grande)
  
- ### futur
- - faire un écran de pause qui permet d'accéder aux paramètres et/ou de revenir au jeu
- - changer l'image de fond pour que le texte du logo et des attaques soit plus visible
+ ### présent
+ - débug
  - jouer et s'assurer que le gameplay est amusant/jouable
+ ### futur
+
  
  ## Aspects techniques
  Nous avons basé notre programme sur la librairie pygame, mais nous avons aussi utilisé la librairie time. Pour ce qui est de la construction du code, on a un code principal qui s'appelle 'main' (avec . et un nombre selon l'avancement et les options du jeu). A partir de là, nous avons créé un module pour les sprites qui s'appelle 'sprite' et nous voulons en créer d'autres pour les différentes parties du programme (comme les bombes et la barre de vie par exemple). Il y a un fichier, 'assets', qui contient les fonds d'écrans du jeu et les images dont nous avons besoin.

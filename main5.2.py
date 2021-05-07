@@ -5,35 +5,13 @@ from sprites import Player
 from bombs import Bombs
 from HP import Barre_vie
 
+# setting default keys to play
+player1Keys = {"up":pygame.K_e,"down":pygame.K_d,"left":pygame.K_s,"right":pygame.K_f,"attack":pygame.K_v}
+player2Keys = {"up":pygame.K_i,"down":pygame.K_k,"left":pygame.K_j,"right":pygame.K_l,"attack":pygame.K_n}
+
 def main():   
-    # Initialize Pygame
-    pygame.init()
-    
-    # sets size of the screen
-    size = (int(pygame.display.Info().current_w),int((pygame.display.Info().current_w*9)/16))
-    screen = pygame.display.set_mode(size)
-    
-    #function to cleanly change "magic numbers" to fit all resolutions
-    def resized(x):
-        return size[0]/(1920/x)
-    
-    #function to create text to display for the space pharse
-    def write(text,xcoord,ycoord):
-        font = pygame.font.Font('freesansbold.ttf', int(resized(67)))
-        text_space = font.render(text, True, (236, 121, 250))
-        textRect_space = text_space.get_rect()
-        textRect_space.center = (resized(ycoord), resized(xcoord)) # postition
-        screen.blit(text_space, textRect_space)
-
-    clock = pygame.time.Clock() # Used to manage how fast the screen updates
-    clock.tick(30) # 30 fps cap
-
-    #size of the arena. up down left right
-    limit_arena = (resized(241), size[1]-resized(240), resized(117), size[0]-resized(235))
-    
-    #sets size of player 1 and 2
-    size1 = int(resized(120)), int(resized(120))
-    size2 = int(resized(120)), int(resized(120))
+    global player1Keys
+    global player2Keys
     
     # health of players
     hp_player1 = 100
@@ -46,31 +24,62 @@ def main():
     # string variables for direction players are facing, will be used to direct attacks.
     player1Facing = 90
     player2Facing = -90
-
+    
+    # Initialize Pygame
+    pygame.init()
+    
+    # sets size of the screen
+    size = (int(pygame.display.Info().current_w),int((pygame.display.Info().current_w*9)/16))
+    screen = pygame.display.set_mode(size)
+     
+    #function to cleanly change "magic numbers" to fit all resolutions
+    def resized(x):
+        return size[0]/(1920/x)
+    
+    #function to create text to display for the space pharse
+    def write(text,xcoord,ycoord):
+        font = pygame.font.Font('freesansbold.ttf', int(resized(67)))
+        text_space = font.render(text, True, (236, 121, 250))
+        textRect_space = text_space.get_rect()
+        textRect_space.center = (resized(ycoord), resized(xcoord)) # postition
+        screen.blit(text_space, textRect_space)
+        
+    #size of the arena. up down left right
+    limit_arena = (resized(241), size[1]-resized(240), resized(117), size[0]-resized(235))
+    
+    clock = pygame.time.Clock() # Used to manage how often the screen updates
+    clock.tick(30) # 30 fps cap
+    
+    #sets size of player 1 and 2
+    size1 = int(resized(120)), int(resized(120))
+    size2 = int(resized(120)), int(resized(120))
+    
     # base images of player sprites, are altered in Player class using facing variable
     player1ImageBase = pygame.image.load("assets/spider sprite og resolution.png").convert_alpha()
     player2ImageBase = pygame.image.load("assets/tank sprite og resolution.png").convert_alpha()
     
-    # setting keys to play
-    player1Keys = {"up":pygame.K_e,"down":pygame.K_d,"left":pygame.K_s,"right":pygame.K_f,"attack":pygame.K_v}
-    player2Keys = {"up":pygame.K_i,"down":pygame.K_k,"left":pygame.K_j,"right":pygame.K_l,"attack":pygame.K_n}
+    # creates players
+    player1 = Player(Player.PURPLE, size1[0], size1[1], size[0]//3, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3], player1Facing, player1ImageBase, player1Speed, hp_player1)
+    player2 = Player(Player.GREEN, size2[0], size2[1], size[0]//3*2, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3], player2Facing, player2ImageBase, player2Speed, hp_player2)
+    
+    # create health bar. (self, hp, hpmax, xpos, ypos, longu, larg, c_vie, c_mort)
+    life_bar1 = Barre_vie(player1.hp, hp_player1, resized(330), resized(110), resized(495), resized(75), (35, 145, 140), (4, 96, 104))
+    life_bar2 = Barre_vie(player2.hp, hp_player2, resized(1105), resized(110), resized(495), resized(75), (186, 106, 202), (87, 42, 125))
     
     # sprite lists
     block_list = pygame.sprite.Group() # BOMBS ONLY
     explosion_list = pygame.sprite.Group() # EXPLOSIONS ONLY
     all_sprites_list = pygame.sprite.Group() # ALL SPRITES
     
-    # creates players
-    player1 = Player(Player.PURPLE, size1[0], size1[1], size[0]//3, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3], player1Facing, player1ImageBase, player1Speed, hp_player1)
-    player2 = Player(Player.GREEN, size2[0], size2[1], size[0]//3*2, size[1]//2, size[0], size[1], limit_arena[0], limit_arena[1], limit_arena[2], limit_arena[3], player2Facing, player2ImageBase, player2Speed, hp_player2)
-    
     #adds both players to all_sprites_list
     all_sprites_list.add(player1)
     all_sprites_list.add(player2)
 
-    # create health bar. (self, hp, hpmax, xpos, ypos, longu, larg, c_vie, c_mort)
-    life_bar1 = Barre_vie(player1.hp, hp_player1, resized(330), resized(110), resized(495), resized(75), (35, 145, 140), (4, 96, 104))
-    life_bar2 = Barre_vie(player2.hp, hp_player2, resized(1105), resized(110), resized(495), resized(75), (186, 106, 202), (87, 42, 125))
+    # create sprite group and list that will be used to detect players' one-time collisions with explosions
+    player1_possible_explosions = player1.differenceExplosions(explosion_list)
+    hits1 = pygame.sprite.spritecollide(player1, player1_possible_explosions, False) # list of bombs that hit player
+    player2_possible_explosions = player2.differenceExplosions(explosion_list)
+    hits2 = pygame.sprite.spritecollide(player2, player2_possible_explosions, False) # list of bombs that hit player
 
     open = True # Boolean for if window is open
     game_start = False # Boolean for if game has been started
@@ -91,13 +100,14 @@ def main():
     end_bg = pygame.image.load("assets/end2.png").convert()
     end_bg = pygame.transform.scale(end_bg, size)
 
-    # shows background
-    screen.blit(beginning_bg, [0, 0])
-    
+
     #loads music, sets volume to 0.5 and plays it on loop indefinitely
     pygame.mixer.music.load("assets/Simon_Bichbihler_In_the_1980s.ogg")
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(-1)
+    
+    # shows background
+    screen.blit(beginning_bg, [0, 0])
     
     #creates the text
     write('Press SPACE to start',450,1360)
@@ -123,48 +133,29 @@ def main():
                     if event.key == pygame.K_SPACE: # pressing space starts the game
                         game_start = True
 
-
-                    # this block can be made into a separate function that takes player key dictionary as argument
-
                     if event.key == pygame.K_RCTRL or event.key == pygame.K_LCTRL: # changing key settings on CTRL hit
 
-                        # erases what was previously written
-                        screen.blit(beginning_bg, [0, 0])
-
-                        #creates the text to display for the space pharse
-                        write('Changing keys for Player 1',420,1360)
-                        write('Change in order:',550,1360)
-                        write('UP, DOWN, LEFT,',630,1360)
-                        write('RIGHT, ATTACK',710,1360)
-                        write('ESCAPE to skip a key',820,1360)
-
-                        pygame.display.flip()
-
-                        for i in player1Keys: # browses and prints each element in dictionary
+                        for i in player1Keys: # browses each element in dictionary
                             next_key = False
+                            screen.blit(beginning_bg, [0, 0]) # erases what was previously written
+                            write('Changing keys for Player 1',475,1360)
+                            write("Press key for: "+i.upper(),650,1360)
+                            write('ESCAPE to skip a key',825,1360)
+                            pygame.display.flip() # updates screen
                             while not(next_key): # while loop that stops when user presses desired key
                                 for event in pygame.event.get():
-                                    if event.type == pygame.KEYDOWN:
+                                    if event.type == pygame.KEYDOWN: # user presses key
                                         if event.key != pygame.K_ESCAPE: # if user didn't press ESCAPE, key is changed.
-                                            player1Keys[i]=event.key
-                                        next_key = True # ends while loop to start algorithm for next move
-
-
-                        # erases what was previously written
-                        screen.blit(beginning_bg, [0, 0])
-
-                        #creates the text to display for the space pharse
-                        write('Changing keys for Player 2',420,1360)
-                        write('Change in order:',550,1360)
-                        write('UP, DOWN, LEFT,',630,1360)
-                        write('RIGHT, ATTACK',710,1360)
-                        write('ESCAPE to skip a key',820,1360)
-
-                        pygame.display.flip()
+                                            player1Keys[i]=event.key # corresponding key added to dictionnary
+                                        next_key = True # ends while loop to start tests again for next key
 
                         for i in player2Keys: # same things for player 2
                             next_key = False
-                            
+                            screen.blit(beginning_bg, [0, 0])
+                            write('Changing keys for Player 2',475,1360)
+                            write("Press key for: "+i.upper(),650,1360)
+                            write('ESCAPE to skip a key',825,1360)
+                            pygame.display.flip()
                             while not(next_key):
                                 for event in pygame.event.get():
                                     if event.type == pygame.KEYDOWN:
@@ -172,14 +163,14 @@ def main():
                                             player2Keys[i]=event.key
                                         next_key = True
                         
-                        # erases what was previously written
                         screen.blit(beginning_bg, [0, 0])                
-                        write('SPACE to play',650,1360)
+                        write('SPACE to play',600,1360)
+                        write('ESC to quit',700,1360)
                         pygame.display.flip()
     
-                else:
+                else: # detect users pressing down on keys associated with movement
                     if event.key == player1Keys["up"]:
-                        player1.up = True
+                        player1.up = True # player 1 is going up
                     if event.key == player2Keys["up"]:
                         player2.up = True
     
@@ -205,7 +196,7 @@ def main():
     
             elif event.type == pygame.KEYUP: # user stops pressing a key
                 if game_start:
-                    if event.key == player1Keys["up"]:
+                    if event.key == player1Keys["up"]: # detect users stopping movement
                         player1.up = False
                     if event.key == player2Keys["up"]:
                         player2.up = False
@@ -281,23 +272,23 @@ def main():
             if player1.hp <= 0 or player2.hp <= 0:
                 screen.blit(end_bg, [0, 0])
                 
-                # clears all lists to avoid bugs
-                block_list.clear()
-                explosion_list.clear()
-                all_sprites_list.clear()
+                # clears all lists to avoid collision detection after end
+                block_list.empty()
+                explosion_list.empty()
+                all_sprites_list.empty()
 
                 # determins which player won and writes it
                 if player1.hp <= 0 and player2.hp <= 0:
-                    write("It's a tie!",550,1450)
+                    write("It's a tie!",375,1450)
                 elif player2.hp <= 0:
-                    write('Player 1 won!',550,1450)
+                    write('Player 1 won!',375,1450)
                 else:
-                    write("Player 2 won!",550,1450)
+                    write("Player 2 won!",375,1450)
                 
                 # options at the end of the game
                 # writing the options
-                write("SPACE to try again", 900,1450)
-                write("ESC to quit", 970,1450)
+                write("Press SPACE to try again", 625,1450)
+                write("Press ESC to quit", 725,1450)
                 # the actual options
                 for event in pygame.event.get():
                     if event.type == pygame.KEYDOWN:
