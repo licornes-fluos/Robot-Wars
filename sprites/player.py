@@ -60,6 +60,8 @@ class Player(pygame.sprite.Sprite):
 
         self.start = False
 
+        self.explosions_collided = pygame.sprite.Group()
+
     # fetches the rectangle object that has the dimensions (of the image)
     # updates the position of this object by setting the values of rect.x and rect.y
         self.rect = self.image.get_rect()
@@ -92,9 +94,20 @@ class Player(pygame.sprite.Sprite):
             return True
         return False
     
-    def hit(self): # Just to check collisions
-        print("Player hit")
-    
     def start(self):
         self.start = True
 
+    def addExplosionHits(self, explosions):
+        '''
+        Add explosions to the list of those that have collided with the player
+        '''
+        self.explosions_collided.add(explosions)
+
+    def differenceExplosions(self, explosions):
+        '''
+        Calculates the difference between the set of explosions that have already
+        collided with the player, and the full list of ongoing explosions.
+        '''
+        explosions_copy = explosions.copy()
+        explosions_copy.remove(self.explosions_collided)
+        return explosions_copy
