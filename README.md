@@ -1,11 +1,15 @@
 # Robot-Wars
 projet de nsi 2020-2021
 
-Robot Wars (nom temporaire?)
- - jeu en 2D top-down à 2 joueurs sur le même clavier (WASD/ZQSD et flèches directionnelles ou personnalisé)
+Robot Wars
+ - jeu en 2D top-down à 2 joueurs sur le même clavier
  - 2 robots contrôlés par chaque joueur se battent jusqu'à ce que l'un perde
  - système d'attaques et de défenses dans le sens vers lequel le robot regarde
 
+## Comment jouer
+ - Par défaut, le joueur 1 utilise E, D, S, F pour aller en haut, bas, gauche, droite respectivement. L'attaque (pose de bombe) est V.
+ - Le joueur 2 utilise I, K, J, L. L'attaque est N.
+ - Le but est de tuer l'adversaire en le faisant toucher assez d'explosions.
 
 ## Projet de base
  - Déterminer une carte 2D top-down (grille)
