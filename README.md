@@ -10,6 +10,9 @@ Robot Wars
  - Par défaut, le joueur 1 utilise E, D, S, F pour aller en haut, bas, gauche, droite respectivement. L'attaque (pose de bombe) est V.
  - Le joueur 2 utilise I, K, J, L. L'attaque est N.
  - Le but est de tuer l'adversaire en le faisant toucher assez d'explosions.
+ ### Besoin pour jouer:
+ - Repository entier
+ - Exécuter le DERNIER fichier main
 
 ## Projet de base
  - Déterminer une carte 2D top-down (grille)
@@ -19,14 +22,10 @@ Robot Wars
  - Vie du perso et dégâts de la bombe
 
 ## Répartition des rôles
- - Aline: s'occupe de prgrammer la carte
+ - Sauge: s'occupe de prgrammer la carte
  - Rachel: s'occupe des personnages
  - Vazgen: s'occupe du temps de vie et dégâts
  - Yuko: s'occupe des attaques
- 
-## Besoin pour jouer:
- - Repository entier
- - Exécuter le DERNIER fichier main
 
 ## Difficultés
  ### passé
