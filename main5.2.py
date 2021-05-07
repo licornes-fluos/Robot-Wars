@@ -280,7 +280,11 @@ def main():
 
             if player1.hp <= 0 or player2.hp <= 0:
                 screen.blit(end_bg, [0, 0])
-
+                
+                # clears all lists to avoid bugs
+                block_list.clear()
+                explosion_list.clear()
+                all_sprites_list.clear()
 
                 # determins which player won and writes it
                 if player1.hp <= 0 and player2.hp <= 0:
