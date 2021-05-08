@@ -1,6 +1,7 @@
 #!/usr/bin/env python3 
 import pygame
 import time
+import random
 from sprites import Player
 from bombs import Bombs
 from HP import Barre_vie
@@ -10,7 +11,6 @@ player1Keys = {"up":pygame.K_e,"down":pygame.K_d,"left":pygame.K_s,"right":pygam
 player2Keys = {"up":pygame.K_i,"down":pygame.K_k,"left":pygame.K_j,"right":pygame.K_l,"attack":pygame.K_n}
 
 def main():   
-    # global variables aren't reinitialized if main is called again
     global player1Keys
     global player2Keys
     
@@ -248,13 +248,13 @@ def main():
             player1_possible_explosions = player1.differenceExplosions(explosion_list)
             hits1 = pygame.sprite.spritecollide(player1, player1_possible_explosions, False) # list of bombs that hit player
             if hits1: # if the list is empty, it won't do anything
-                player1.hp -= 20
+                player1.hp -= random.randint(15,22) # health lowered by anywhere between 15 and 22 points
                 player1.addExplosionHits(hits1)
                 
             player2_possible_explosions = player2.differenceExplosions(explosion_list)
             hits2 = pygame.sprite.spritecollide(player2, player2_possible_explosions, False) # list of bombs that hit player
             if hits2: # if the list is empty, it won't do anything
-                player2.hp -= 20
+                player2.hp -= random.randint(15,22) # health lowered by anywhere between 15 and 22 points
                 player2.addExplosionHits(hits2)
 
             Bombs.manageBomb(player1, block_list, player1.attack,  all_sprites_list, explosion_list, resized(250)) # Calling the function manageBomb in the file Bombs.py
