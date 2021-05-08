@@ -22,7 +22,7 @@ Robot Wars
  - Vie du perso et dégâts de la bombe
 
 ## Répartition des rôles
- - Sauge: s'occupe de prgrammer la carte
+ - Aline: s'occupe de prgrammer la carte
  - Rachel: s'occupe des personnages
  - Vazgen: s'occupe du temps de vie et dégâts
  - Yuko: s'occupe des attaques
