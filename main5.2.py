@@ -10,6 +10,7 @@ player1Keys = {"up":pygame.K_e,"down":pygame.K_d,"left":pygame.K_s,"right":pygam
 player2Keys = {"up":pygame.K_i,"down":pygame.K_k,"left":pygame.K_j,"right":pygame.K_l,"attack":pygame.K_n}
 
 def main():   
+    # global variables aren't reinitialized if main is called again
     global player1Keys
     global player2Keys
     
