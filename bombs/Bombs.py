@@ -74,9 +74,6 @@ def manageBomb (player, block_list, playerAttack, all_sprites_list, explosion_li
     '''
     fonction qui prend comme argument player, block_list, playerAttack, all_sprites_list.
     Cette fonction est appelée dans la main loop "while open"
-    Elle permet de
-    - créer les bombes
-    - afficher qqchose lorsqu'une bombe touche un joueur
     '''
 
     # calls the explode function and applies it on the bomb sprites
