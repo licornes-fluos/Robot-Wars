@@ -12,7 +12,7 @@ Robot Wars
  - Le but est de tuer l'adversaire en le faisant toucher assez d'explosions.
  ### Besoin pour jouer:
  - Repository entier
- - Exécuter le DERNIER fichier main
+ - Exécuter le DERNIER fichier main, ici main5.2
 
 ## Projet de base
  - Déterminer une carte 2D top-down (grille)
